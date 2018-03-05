@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Es6相关Dec 01, 20172点击 ECMAScript 6（以下简称ES6）是JavaScript语言的下一代标准。因为当前版本的ES6是在2015年发布的，所以又称ECMAScript 2015。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Es6相关">
+<meta property="og:url" content="http://yoursite.com/2017/04/15/es6/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Es6相关Dec 01, 20172点击 ECMAScript 6（以下简称ES6）是JavaScript语言的下一代标准。因为当前版本的ES6是在2015年发布的，所以又称ECMAScript 2015。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-05T02:02:00.604Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Es6相关">
+<meta name="twitter:description" content="Es6相关Dec 01, 20172点击 ECMAScript 6（以下简称ES6）是JavaScript语言的下一代标准。因为当前版本的ES6是在2015年发布的，所以又称ECMAScript 2015。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/15/es6/"/>
+
+
+
+
+
+  <title>Es6相关 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categoriesddd" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/15/es6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Es6相关</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-15T00:00:00+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Es6相关"><a href="#Es6相关" class="headerlink" title="Es6相关"></a>Es6相关</h1><p>Dec 01, 2017<em>2点击</em></p>
+<p>ECMAScript 6（以下简称ES6）是JavaScript语言的下一代标准。因为当前版本的ES6是在2015年发布的，所以又称ECMAScript 2015。</p>
+<a id="more"></a>
+<h4 id="最常用的ES6特性"><a href="#最常用的ES6特性" class="headerlink" title="最常用的ES6特性"></a>最常用的ES6特性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let,const,class,extends,super,arrow functions,template string, destructuring, default,</span><br><span class="line">rest arguments</span><br></pre></td></tr></table></figure>
+<p>这些是es6最常用的几个语法,从头开始记;</p>
+<h5 id="let-const"><a href="#let-const" class="headerlink" title="let,const"></a>let,const</h5><p> 这两个的用途与<code>var</code>类似，都是用来声明变量的，但在实际运用中他俩都有各自的特殊用途。<br> 首先来看下面这个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var name = zyh;</span><br><span class="line">while(true)&#123;</span><br><span class="line">       var name = &apos;hyz&apos;;</span><br><span class="line">       console.log(name) // hyz;</span><br><span class="line">     	break</span><br><span class="line">&#125;</span><br><span class="line">console.log(name) //hyz</span><br></pre></td></tr></table></figure>
+<p> 使用 var 两次输出的都是 hyz 这是因为esc5只有全局作用域和函数作用域，没有块级作用域，这带来很多不合理的场景,第一种场景就是变量覆盖，而let实际上实在Javascript新增的块级作用域，它只会在let所在的代码块中有效;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let name = &apos;zyh&apos;</span><br><span class="line">while (true) &#123;</span><br><span class="line">    let name = &apos;hyz&apos;</span><br><span class="line">    console.log(name)  //hyz</span><br><span class="line">    break</span><br><span class="line">&#125;</span><br><span class="line">console.log(name)  //zyh</span><br></pre></td></tr></table></figure>
+<p> 另外一个 var 带来的不合理场景就是用来计数的循环变量泄露为全局变量，看下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = [];</span><br><span class="line">for (var i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">  a[i] = function () &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[6](); // 10</span><br></pre></td></tr></table></figure>
+<p> 上面代码中变量<code>i</code>是 var 声明的，在全局范围内都有效所以每次循环<code>i</code>的值都会覆盖旧值导致最后输出的是i的值，而let就不会出现这种情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = [];</span><br><span class="line">for (let i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">  a[i] = function () &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[6](); // 6</span><br></pre></td></tr></table></figure>
+<p> 再来看一个更常见的例子，了解下如果不用ES6，而用闭包如何解决这个问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var clickbox = document.getElementByClassName(&apos;.box&apos;)</span><br><span class="line">for (var i = 0; i &lt; clickbox.length; i++)&#123;</span><br><span class="line">    clickbox[i].onclick = function()&#123;</span><br><span class="line">        console.log(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们本来希望的是点击不同的clickBox，显示不同的i，但事实是无论我们点击哪个clickBox，输出的都是5。下面我们来看下，如何用闭包搞定它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function bindbox(i)&#123;</span><br><span class="line">    var onclick = function(e)&#123;</span><br><span class="line">        console.log(i)</span><br><span class="line">    &#125;</span><br><span class="line">    return onclick;</span><br><span class="line">&#125;</span><br><span class="line">var clickbox = document.getElementByClassName(&apos;.box&apos;)</span><br><span class="line">for (var i = 0; i &lt; clickbox.length; i++)&#123;</span><br><span class="line">    clickbox[i].onclick = bindbox(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>const</strong>也可以声明变量但是声明的变量是常量，一旦声明常量就 不能改变;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const PI = Math.PI</span><br><span class="line">PI = 23 //Module build failed: SyntaxError: /es6/app.js: &quot;PI&quot; is read-only;</span><br></pre></td></tr></table></figure>
+<p> 当我们尝试去改变用const声明的常量时，浏览器就会报错。<br>const有一个很好的应用场景，就是当我们引用第三方库的时声明的变量，用const来声明可以避免未来不小心重 命名而导致出现bug</p>
+<h3 id="class-extends-super"><a href="#class-extends-super" class="headerlink" title="class, extends, super"></a>class, extends, super</h3><p>这三个特性涉及了ES5中最令人头疼的的几个部分：原型、构造函数，继承…你还在为它们复杂难懂的语法而烦恼吗？你还在为指针到底指向哪里而纠结万分吗？</p>
+<p>有了ES6我们不再烦恼！</p>
+<p>ES6提供了更接近传统语言的写法，引入了Class（类）这个概念。新的class写法让对象原型的写法更加清晰、更像面向对象编程的语法，也更加通俗易懂。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Animal &#123;</span><br><span class="line">    constructor()&#123;</span><br><span class="line">        this.type = &apos;animal&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    says(say)&#123;</span><br><span class="line">        console.log(this.type + &apos; says &apos; + say)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let animal = new Animal()</span><br><span class="line">animal.says(&apos;hello&apos;) //animal says hello</span><br><span class="line"></span><br><span class="line">class Cat extends Animal &#123;</span><br><span class="line">    constructor()&#123;</span><br><span class="line">        super()</span><br><span class="line">        this.type = &apos;cat&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let cat = new Cat()</span><br><span class="line">cat.says(&apos;hello&apos;) //cat says hello</span><br></pre></td></tr></table></figure>
+<p>上面代码首先用<code>class</code>定义了一个“类”，可以看到里面有一个<code>constructor</code>方法，这就是构造方法，而<code>this</code>关键字则代表实例对象。简单地说，<code>constructor</code>内定义的方法和属性是实例对象自己的，而<code>constructor</code>外定义的方法和属性则是所有实力对象可以共享的。</p>
+<p>Class之间可以通过<code>extends</code>关键字实现继承，这比ES5的通过修改原型链实现继承，要清晰和方便很多。上面定义了一个Cat类，该类通过<code>extends</code>关键字，继承了Animal类的所有属性和方法。</p>
+<p><code>super</code>关键字，它指代父类的实例（即父类的this对象）。子类必须在<code>constructor</code>方法中调用<code>super</code>方法，否则新建实例时会报错。这是因为子类没有自己的<code>this</code>对象，而是继承父类的<code>this</code>对象，然后对其进行加工。如果不调用<code>super</code>方法，子类就得不到<code>this</code>对象。</p>
+<p>ES6的继承机制，实质是先创造父类的实例对象this（所以必须先调用super方法），然后再用子类的构造函数修改this。</p>
+<p>P.S 如果你写react的话，就会发现以上三个东西在最新版React中出现得很多。创建的每个component都是一个继承<code>React.Component</code>的类。<a href="https://link.jianshu.com/?t=https://facebook.github.io/react/docs/reusable-components.html" target="_blank" rel="noopener">详见react文档</a></p>
+<h3 id="arrow-function"><a href="#arrow-function" class="headerlink" title="arrow function"></a>arrow function</h3><p>这个恐怕是ES6最最常用的一个新特性了，用它来写function比原来的写法要简洁清晰很多:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function(i)&#123; return i + 1; &#125; //ES5</span><br><span class="line">(i) =&gt; i + 1 //ES6</span><br></pre></td></tr></table></figure>
+<p>简直是简单的不像话对吧…<br>如果方程比较复杂，则需要用<code>{}</code>把代码包起来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function(x, y) &#123; </span><br><span class="line">    x++;</span><br><span class="line">    y--;</span><br><span class="line">    return x + y;</span><br><span class="line">&#125;</span><br><span class="line">(x, y) =&gt; &#123;x++; y--; return x+y&#125;</span><br></pre></td></tr></table></figure>
+<p>除了看上去更简洁以外，arrow function还有一项超级无敌的功能！<br>长期以来，JavaScript语言的<code>this</code>对象一直是一个令人头痛的问题，在对象方法中使用this，必须非常小心。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Animal &#123;</span><br><span class="line">    constructor()&#123;</span><br><span class="line">        this.type = &apos;animal&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    says(say)&#123;</span><br><span class="line">        setTimeout(function()&#123;</span><br><span class="line">            console.log(this.type + &apos; says &apos; + say)</span><br><span class="line">        &#125;, 1000)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var animal = new Animal()</span><br><span class="line">animal.says(&apos;hi&apos;)  //undefined says hi</span><br></pre></td></tr></table></figure>
+<p>运行上面的代码会报错，这是因为<code>setTimeout</code>中的<code>this</code>指向的是全局对象。所以为了让它能够正确的运行，传统的解决方法有两种：</p>
+<ol>
+<li><p>第一种是将this传给self,再用self来指代this</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">says(say)&#123;</span><br><span class="line">    var self = this;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">        console.log(self.type + &apos; says &apos; + say)</span><br><span class="line">    &#125;, 1000)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2.第二种方法是用<code>bind(this)</code>,即<br>says(say){<br>setTimeout(function(){<br>console.log(self.type + ‘ says ‘ + say)<br>}.bind(this), 1000)<br>但现在我们有了箭头函数，就不需要这么麻烦了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Animal &#123;</span><br><span class="line">    constructor()&#123;</span><br><span class="line">        this.type = &apos;animal&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    says(say)&#123;</span><br><span class="line">        setTimeout( () =&gt; &#123;</span><br><span class="line">            console.log(this.type + &apos; says &apos; + say)</span><br><span class="line">        &#125;, 1000)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var animal = new Animal()</span><br><span class="line">animal.says(&apos;hi&apos;)  //animal says hi</span><br></pre></td></tr></table></figure>
+<p>当我们使用箭头函数时，函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。<br>并不是因为箭头函数内部有绑定this的机制，实际原因是箭头函数根本没有自己的this，它的this是继承外面的，因此内部的this就是外层代码块的this。</p>
+<h3 id="template-string"><a href="#template-string" class="headerlink" title="template string"></a>template string</h3><p>这个东西也是非常有用，当我们要插入大段的html内容到文档中时，传统的写法非常麻烦，所以之前我们通常会引用一些模板工具库，比如mustache等等。</p>
+<p>大家可以先看下面一段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#result&quot;).append(</span><br><span class="line">  &quot;There are &lt;b&gt;&quot; + basket.count + &quot;&lt;/b&gt; &quot; +</span><br><span class="line">  &quot;items in your basket, &quot; +</span><br><span class="line">  &quot;&lt;em&gt;&quot; + basket.onSale +</span><br><span class="line">  &quot;&lt;/em&gt; are on sale!&quot;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>我们要用一堆的’+’号来连接文本与变量，而使用ES6的新特性模板字符串<code></code>后，我们可以直接这么来写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#result&quot;).append(`</span><br><span class="line">  There are &lt;b&gt;$&#123;basket.count&#125;&lt;/b&gt; items</span><br><span class="line">   in your basket, &lt;em&gt;$&#123;basket.onSale&#125;&lt;/em&gt;</span><br><span class="line">  are on sale!</span><br><span class="line">`);</span><br></pre></td></tr></table></figure>
+<p>用反引号<code>（\</code>）<code>来标识起始，用</code>${}`来引用变量，而且所有的空格和缩进都会被保留在输出之中，是不是非常爽？！</p>
+<p>React Router从第1.0.3版开始也使用ES6语法了，比如这个例子：<br><code>&lt;Link to={\</code>/taco/${taco.name}<code>}&gt;{taco.name}&lt;/Link&gt;</code><br><a href="https://link.jianshu.com/?t=https://github.com/rackt/react-router/blob/latest/examples/passing-props-to-children/app.js" target="_blank" rel="noopener">React Router</a></p>
+<h3 id="destructuring"><a href="#destructuring" class="headerlink" title="destructuring"></a>destructuring</h3><p>ES6允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）。</p>
+<p>看下面的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let cat = &apos;ken&apos;</span><br><span class="line">let dog = &apos;lili&apos;</span><br><span class="line">let zoo = &#123;cat: cat, dog: dog&#125;</span><br><span class="line">console.log(zoo)  //Object &#123;cat: &quot;ken&quot;, dog: &quot;lili&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>用ES6完全可以像下面这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let cat = &apos;ken&apos;</span><br><span class="line">let dog = &apos;lili&apos;</span><br><span class="line">let zoo = &#123;cat, dog&#125;</span><br><span class="line">console.log(zoo)  //Object &#123;cat: &quot;ken&quot;, dog: &quot;lili&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>反过来可以这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let dog = &#123;type: &apos;animal&apos;, many: 2&#125;</span><br><span class="line">let &#123; type, many&#125; = dog</span><br><span class="line">console.log(type, many)   //animal 2</span><br></pre></td></tr></table></figure>
+<h3 id="default-rest"><a href="#default-rest" class="headerlink" title="default, rest"></a>default, rest</h3><p>default很简单，意思就是默认值。大家可以看下面的例子，调用<code>animal()</code>方法时忘了传参数，传统的做法就是加上这一句<code>type = type || &#39;cat&#39;</code>来指定默认值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function animal(type)&#123;</span><br><span class="line">    type = type || &apos;cat&apos;  </span><br><span class="line">    console.log(type)</span><br><span class="line">&#125;</span><br><span class="line">animal()</span><br></pre></td></tr></table></figure>
+<p>如果用ES6我们而已直接这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function animal(type = &apos;cat&apos;)&#123;</span><br><span class="line">    console.log(type)</span><br><span class="line">&#125;</span><br><span class="line">animal()</span><br></pre></td></tr></table></figure>
+<p>最后一个rest语法也很简单，直接看例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function animals(...types)&#123;</span><br><span class="line">    console.log(types)</span><br><span class="line">&#125;</span><br><span class="line">animals(&apos;cat&apos;, &apos;dog&apos;, &apos;fish&apos;) //[&quot;cat&quot;, &quot;dog&quot;, &quot;fish&quot;]</span><br></pre></td></tr></table></figure>
+<p>而如果不用ES6的话，我们则得使用ES5的<code>arguments</code>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/06/gulp/" rel="next" title="gulp自动化构建工具学习分享">
+                <i class="fa fa-chevron-left"></i> gulp自动化构建工具学习分享
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Es6相关"><span class="nav-number">1.</span> <span class="nav-text">Es6相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最常用的ES6特性"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">最常用的ES6特性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#let-const"><span class="nav-number">1.0.0.1.1.</span> <span class="nav-text">let,const</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class-extends-super"><span class="nav-number">1.0.1.</span> <span class="nav-text">class, extends, super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arrow-function"><span class="nav-number">1.0.2.</span> <span class="nav-text">arrow function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#template-string"><span class="nav-number">1.0.3.</span> <span class="nav-text">template string</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#destructuring"><span class="nav-number">1.0.4.</span> <span class="nav-text">destructuring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#default-rest"><span class="nav-number">1.0.5.</span> <span class="nav-text">default, rest</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
