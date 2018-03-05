@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文档操作addClass()    向匹配的元素添加指定的类名。after()    在匹配的元素之后插入内容。append()    向匹配元素集合中的每个元素结尾插入由参数指定的内容。appendTo()    向目标结尾插入匹配元素集合中的每个元素。attr()    设置或返回匹配元素的属性和值。before()    在每个匹配的元素之前插入内容。clone()    创建匹配元素集合的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jquery">
+<meta property="og:url" content="http://yoursite.com/2017/06/05/jquery/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="文档操作addClass()    向匹配的元素添加指定的类名。after()    在匹配的元素之后插入内容。append()    向匹配元素集合中的每个元素结尾插入由参数指定的内容。appendTo()    向目标结尾插入匹配元素集合中的每个元素。attr()    设置或返回匹配元素的属性和值。before()    在每个匹配的元素之前插入内容。clone()    创建匹配元素集合的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-05T15:54:36.604Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jquery">
+<meta name="twitter:description" content="文档操作addClass()    向匹配的元素添加指定的类名。after()    在匹配的元素之后插入内容。append()    向匹配元素集合中的每个元素结尾插入由参数指定的内容。appendTo()    向目标结尾插入匹配元素集合中的每个元素。attr()    设置或返回匹配元素的属性和值。before()    在每个匹配的元素之前插入内容。clone()    创建匹配元素集合的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/05/jquery/"/>
+
+
+
+
+
+  <title>jquery | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categoriesddd" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/jquery/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">jquery</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-05T00:00:00+08:00">
+                2017-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文档操作<br>addClass()    向匹配的元素添加指定的类名。<br>after()    在匹配的元素之后插入内容。<br>append()    向匹配元素集合中的每个元素结尾插入由参数指定的内容。<br>appendTo()    向目标结尾插入匹配元素集合中的每个元素。<br>attr()    设置或返回匹配元素的属性和值。<br>before()    在每个匹配的元素之前插入内容。<br>clone()    创建匹配元素集合的副本。<br>detach()    从 DOM 中移除匹配元素集合。<br>empty()    删除匹配的元素集合中所有的子节点。<br>hasClass()    检查匹配的元素是否拥有指定的类。<br>html()    设置或返回匹配的元素集合中的 HTML 内容。<br>insertAfter()    把匹配的元素插入到另一个指定的元素集合的后面。<br>insertBefore()    把匹配的元素插入到另一个指定的元素集合的前面。<br>prepend()    向匹配元素集合中的每个元素开头插入由参数指定的内容。<br>prependTo()    向目标开头插入匹配元素集合中的每个元素。<br>remove()    移除所有匹配的元素。<br>removeAttr()    从所有匹配的元素中移除指定的属性。<br>removeClass()    从所有匹配的元素中删除全部或者指定的类。<br>replaceAll()    用匹配的元素替换所有匹配到的元素。<br>replaceWith()    用新内容替换匹配的元素。<br>text()    设置或返回匹配元素的内容。<br>toggleClass()    从匹配的元素中添加或删除一个类。<br>unwrap()    移除并替换指定元素的父元素。<br>val()    设置或返回匹配元素的值。<br>wrap()    把匹配的元素用指定的内容或元素包裹起来。<br>wrapAll()    把所有匹配的元素用指定的内容或元素包裹起来。<br>wrapinner()    将每一个匹配的元素的子内容用指定的内容或元素包裹起来。<br>效果<br>animate()    对被选元素应用“自定义”的动画<br>clearQueue()    对被选元素移除所有排队的函数（仍未运行的）<br>delay()    对被选元素的所有排队函数（仍未运行）设置延迟<br>dequeue()    运行被选元素的下一个排队函数<br>fadeIn()    逐渐改变被选元素的不透明度，从隐藏到可见<br>fadeOut()    逐渐改变被选元素的不透明度，从可见到隐藏<br>fadeTo()    把被选元素逐渐改变至给定的不透明度<br>hide()    隐藏被选的元素<br>queue()    显示被选元素的排队函数<br>show()    显示被选的元素<br>slideDown()    通过调整高度来滑动显示被选元素<br>slideToggle()    对被选元素进行滑动隐藏和滑动显示的切换<br>slideUp()    通过调整高度来滑动隐藏被选元素<br>stop()    停止在被选元素上运行动画<br>toggle()    对被选元素进行隐藏和显示的切换<br>事件<br>bind()    向匹配元素附加一个或更多事件处理器<br>blur()    触发、或将函数绑定到指定元素的 blur 事件<br>change()    触发、或将函数绑定到指定元素的 change 事件<br>click()    触发、或将函数绑定到指定元素的 click 事件<br>dblclick()    触发、或将函数绑定到指定元素的 double click 事件<br>delegate()    向匹配元素的当前或未来的子元素附加一个或多个事件处理器<br>die()    移除所有通过 live() 函数添加的事件处理程序。<br>error()    触发、或将函数绑定到指定元素的 error 事件<br>event.isDefaultPrevented()    返回 event 对象上是否调用了 event.preventDefault()。<br>event.pageX    相对于文档左边缘的鼠标位置。<br>event.pageY    相对于文档上边缘的鼠标位置。<br>event.preventDefault()    阻止事件的默认动作。<br>event.result    包含由被指定事件触发的事件处理器返回的最后一个值。<br>event.target    触发该事件的 DOM 元素。<br>event.timeStamp    该属性返回从 1970 年 1 月 1 日到事件发生时的毫秒数。<br>event.type    描述事件的类型。<br>event.which    指示按了哪个键或按钮。<br>focus()    触发、或将函数绑定到指定元素的 focus 事件<br>keydown()    触发、或将函数绑定到指定元素的 key down 事件<br>keypress()    触发、或将函数绑定到指定元素的 key press 事件<br>keyup()    触发、或将函数绑定到指定元素的 key up 事件<br>live()    为当前或未来的匹配元素添加一个或多个事件处理器<br>load()    触发、或将函数绑定到指定元素的 load 事件<br>mousedown()    触发、或将函数绑定到指定元素的 mouse down 事件<br>mouseenter()    触发、或将函数绑定到指定元素的 mouse enter 事件<br>mouseleave()    触发、或将函数绑定到指定元素的 mouse leave 事件<br>mousemove()    触发、或将函数绑定到指定元素的 mouse move 事件<br>mouseout()    触发、或将函数绑定到指定元素的 mouse out 事件<br>mouseover()    触发、或将函数绑定到指定元素的 mouse over 事件<br>mouseup()    触发、或将函数绑定到指定元素的 mouse up 事件<br>one()    向匹配元素添加事件处理器。每个元素只能触发一次该处理器。<br>ready()    文档就绪事件（当 HTML 文档就绪可用时）<br>resize()    触发、或将函数绑定到指定元素的 resize 事件<br>scroll()    触发、或将函数绑定到指定元素的 scroll 事件<br>select()    触发、或将函数绑定到指定元素的 select 事件<br>submit()    触发、或将函数绑定到指定元素的 submit 事件<br>toggle()    绑定两个或多个事件处理器函数，当发生轮流的 click 事件时执行。<br>trigger()    所有匹配元素的指定事件<br>triggerHandler()    第一个被匹配元素的指定事件<br>unbind()    从匹配元素移除一个被添加的事件处理器<br>undelegate()    从匹配元素移除一个被添加的事件处理器，现在或将来<br>unload()    触发、或将函数绑定到指定元素的 unload 事件<br>属性操作<br>addClass()    向匹配的元素添加指定的类名。<br>attr()    设置或返回匹配元素的属性和值。<br>hasClass()    检查匹配的元素是否拥有指定的类。<br>html()    设置或返回匹配的元素集合中的 HTML 内容。<br>removeAttr()    从所有匹配的元素中移除指定的属性。<br>removeClass()    从所有匹配的元素中删除全部或者指定的类。<br>toggleClass()    从匹配的元素中添加或删除一个类。<br>val()    设置或返回匹配元素的值。<br>css操作<br>css()    设置或返回匹配元素的样式属性。<br>height()    设置或返回匹配元素的高度。<br>offset()    返回第一个匹配元素相对于文档的位置。<br>offsetParent()    返回最近的定位祖先元素。<br>position()    返回第一个匹配元素相对于父元素的位置。<br>scrollLeft()    设置或返回匹配元素相对滚动条左侧的偏移。<br>scrollTop()    设置或返回匹配元素相对滚动条顶部的偏移。<br>width()    设置或返回匹配元素的宽度。<br>ajax<br>jQuery.ajax()    执行异步 HTTP (Ajax) 请求。<br>.ajaxComplete()    当 Ajax 请求完成时注册要调用的处理程序。这是一个 Ajax 事件。<br>.ajaxError()    当 Ajax 请求完成且出现错误时注册要调用的处理程序。这是一个 Ajax 事件。<br>.ajaxSend()    在 Ajax 请求发送之前显示一条消息。<br>jQuery.ajaxSetup()    设置将来的 Ajax 请求的默认值。<br>.ajaxStart()    当首个 Ajax 请求完成开始时注册要调用的处理程序。这是一个 Ajax 事件。<br>.ajaxStop()    当所有 Ajax 请求完成时注册要调用的处理程序。这是一个 Ajax 事件。<br>.ajaxSuccess()    当 Ajax 请求成功完成时显示一条消息。<br>jQuery.get()    使用 HTTP GET 请求从服务器加载数据。<br>jQuery.getJSON()    使用 HTTP GET 请求从服务器加载 JSON 编码数据。<br>jQuery.getScript()    使用 HTTP GET 请求从服务器加载 JavaScript 文件，然后执行该文件。<br>.load()    从服务器加载数据，然后把返回到 HTML 放入匹配元素。<br>jQuery.param()    创建数组或对象的序列化表示，适合在 URL 查询字符串或 Ajax 请求中使用。<br>jQuery.post()    使用 HTTP POST 请求从服务器加载数据。<br>.serialize()    将表单内容序列化为字符串。<br>.serializeArray()    序列化表单元素，返回 JSON 数据结构数据。<br>遍历<br>.add()    将元素添加到匹配元素的集合中。<br>.andSelf()    把堆栈中之前的元素集添加到当前集合中。<br>.children()    获得匹配元素集合中每个元素的所有子元素。<br>.closest()    从元素本身开始，逐级向上级元素匹配，并返回最先匹配的祖先元素。<br>.contents()    获得匹配元素集合中每个元素的子元素，包括文本和注释节点。<br>.each()    对 jQuery 对象进行迭代，为每个匹配元素执行函数。<br>.end()    结束当前链中最近的一次筛选操作，并将匹配元素集合返回到前一次的状态。<br>.eq()    将匹配元素集合缩减为位于指定索引的新元素。<br>.filter()    将匹配元素集合缩减为匹配选择器或匹配函数返回值的新元素。<br>.find()    获得当前匹配元素集合中每个元素的后代，由选择器进行筛选。<br>.first()    将匹配元素集合缩减为集合中的第一个元素。<br>.has()    将匹配元素集合缩减为包含特定元素的后代的集合。<br>.is()    根据选择器检查当前匹配元素集合，如果存在至少一个匹配元素，则返回 true。<br>.last()    将匹配元素集合缩减为集合中的最后一个元素。<br>.map()    把当前匹配集合中的每个元素传递给函数，产生包含返回值的新 jQuery 对象。<br>.next()    获得匹配元素集合中每个元素紧邻的同辈元素。<br>.nextAll()    获得匹配元素集合中每个元素之后的所有同辈元素，由选择器进行筛选（可选）。<br>.nextUntil()    获得每个元素之后所有的同辈元素，直到遇到匹配选择器的元素为止。<br>.not()    从匹配元素集合中删除元素。<br>.offsetParent()    获得用于定位的第一个父元素。<br>.parent()    获得当前匹配元素集合中每个元素的父元素，由选择器筛选（可选）。<br>.parents()    获得当前匹配元素集合中每个元素的祖先元素，由选择器筛选（可选）。<br>.parentsUntil()    获得当前匹配元素集合中每个元素的祖先元素，直到遇到匹配选择器的元素为止。<br>.prev()    获得匹配元素集合中每个元素紧邻的前一个同辈元素，由选择器筛选（可选）。<br>.prevAll()    获得匹配元素集合中每个元素之前的所有同辈元素，由选择器进行筛选（可选）。<br>.prevUntil()    获得每个元素之前所有的同辈元素，直到遇到匹配选择器的元素为止。<br>.siblings()    获得匹配元素集合中所有元素的同辈元素，由选择器筛选（可选）。<br>.slice()    将匹配元素集合缩减为指定范围的子集。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/15/es6/" rel="next" title="Es6相关">
+                <i class="fa fa-chevron-left"></i> Es6相关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
