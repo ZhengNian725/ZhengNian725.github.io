@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.Javascript组成JavaScript的实现包括以下3个部分： 1）核心（ECMAScript）：描述了JS的语法和基本对象。 2）文档对象模型 （DOM）：处理网页内容的方法和接口 3）浏览器对象模型（BOM）：与浏览器交互的方法和接口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript DOM与BOM详解">
+<meta property="og:url" content="http://yoursite.com/2017/09/07/javascript-DOM-BOM/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.Javascript组成JavaScript的实现包括以下3个部分： 1）核心（ECMAScript）：描述了JS的语法和基本对象。 2）文档对象模型 （DOM）：处理网页内容的方法和接口 3）浏览器对象模型（BOM）：与浏览器交互的方法和接口">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135215646?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135305647?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135326655?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135345273?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135409617?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135427874?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135444664?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135508681?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135542094?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135621714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135542094?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135621714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135729340?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135744860?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135824498?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160826135845358?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2018-03-07T13:59:29.773Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript DOM与BOM详解">
+<meta name="twitter:description" content="1.Javascript组成JavaScript的实现包括以下3个部分： 1）核心（ECMAScript）：描述了JS的语法和基本对象。 2）文档对象模型 （DOM）：处理网页内容的方法和接口 3）浏览器对象模型（BOM）：与浏览器交互的方法和接口">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160826135215646?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/07/javascript-DOM-BOM/"/>
+
+
+
+
+
+  <title>javascript DOM与BOM详解 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categoriesddd" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/07/javascript-DOM-BOM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">javascript DOM与BOM详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T00:00:00+08:00">
+                2017-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-Javascript组成"><a href="#1-Javascript组成" class="headerlink" title="1.Javascript组成"></a><strong>1.Javascript组成</strong></h1><p><strong>JavaScript的实现包括以下3个部分：</strong></p>
+<p>1）核心（ECMAScript）：描述了JS的<strong>语法和基本对象</strong>。</p>
+<p>2）文档对象模型 （DOM）：<strong>处理网页内容</strong>的方法和接口</p>
+<p>3）浏览器对象模型（BOM）：<strong>与浏览器交互</strong>的方法和接口</p>
+<a id="more"></a>
+<p><strong>ECMAScript扩展知识：</strong></p>
+<p>① ECMAScript是一个标准，JS只是它的一个实现，其他实现包括ActionScript。</p>
+<p>② “ECMAScript可以为不同种类的宿主环境提供核心的脚本编程能力……”，即ECMAScript不与具体的宿主环境相绑定，如JS的宿主环境是浏览器，AS的宿主环境是Flash。</p>
+<p>③ECMAScript描述了以下内容：语法、类型、语句、关键字、保留字、运算符、对象。</p>
+<p> <img src="http://img.blog.csdn.net/20160826135215646?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p><a href="http://blog.csdn.net/qq877507054/article/details/52541956" target="_blank" rel="noopener">有关JS对象基础讲解的的另一篇博文</a></p>
+<p>我们都知道， javascript 有三部分构成，ECMAScript，DOM和BOM，根据宿主（浏览器）的不同，具体的表现形式也不尽相同，ie和其他的浏览器风格迥异。</p>
+<p>\1. DOM 是 W3C的标准；[所有浏览器公共遵守的标准]<br>\2. BOM 是 各个浏览器厂商根据 DOM<br>在各自浏览器上的实现;[表现为不同浏览器定义有差别,实现方式不同]<br>\3. window 是 BOM对象，而非js对象；</p>
+<p>DOM（文档对象模型）是 HTML 和 XML 的应用程序接口（API）。</p>
+<p>BOM 主要处理浏览器窗口和框架，不过通常浏览器特定的 JavaScript 扩展都被看做 BOM 的一部分。这些扩展包括：</p>
+<p>弹出新的浏览器窗口</p>
+<p>移动、关闭浏览器窗口以及调整窗口大小</p>
+<p>提供 Web 浏览器详细信息的定位对象</p>
+<p>提供用户屏幕分辨率详细信息的屏幕对象</p>
+<p>对 cookie 的支持</p>
+<p>IE 扩展了 BOM，加入了ActiveXObject类，可以通过JavaScript实例化ActiveX对象</p>
+<p>javacsript是通过访问BOM（Browser Object Model）对象来访问、控制、修改客户端(浏览器)，由于BOM的window包含了document，window对象的属性和方法是直接可以使用而且被感知的，因此可以直接使用window对象的document属性，通过document属性就可以访问、检索、修改XHTML文档内容与结构。因为document对象又是DOM（Document Object Model）模型的根节点。可以说，BOM包含了DOM(对象)，浏览器提供出来给予访问的是BOM对象，从BOM对象再访问到DOM对象，从而js可以操作浏览器以及浏览器读取到的文档。其中<br>DOM包含：window</p>
+<p>Window对象包含属性：document、location、navigator、screen、history、frames</p>
+<p>Document根节点包含子节点：forms、location、anchors、images、links</p>
+<p>从window.document已然可以看出，DOM的最根本的对象是BOM的window对象的子对象。</p>
+<p><strong>区别</strong>：DOM描述了处理网页内容的方法和接口，BOM描述了与浏览器进行交互的方法和接口</p>
+<h2 id="1-1-DOM-DOCUMENT-BOM-WINDOW-区别"><a href="#1-1-DOM-DOCUMENT-BOM-WINDOW-区别" class="headerlink" title="1.1 DOM, DOCUMENT, BOM, WINDOW 区别"></a><strong>1.1 DOM, DOCUMENT, BOM, WINDOW 区别</strong></h2><p>DOM 全称是 Document Object Model，也就是文档对象模型。是针对XML的基于树的API。描述了处理网页内容的方法和接口，是HTML和XML的API，DOM把整个页面规划成由节点层级构成的文档。针对XHTML和HTML的DOM。这个DOM定义了一个HTMLDocument和HTMLElement做为这种实现的基础,就是说<strong>为了能以编程的方法操作这个 HTML 的内容</strong>（比如添加某些元素、修改元素的内容、删除某些元素），我们把这个 HTML 看做一个对象树（DOM树），它本身和里面的所有东西比如 <div></div> 这些标签都看做一个对象，每个对象都叫做一个节点（node），节点可以理解为 DOM 中所有 Object 的父类。</p>
+<p> <img src="http://img.blog.csdn.net/20160826135305647?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>DOM 有什么用？就是为了操作 HTML 中的元素，比如说我们要通过 JS 把这个网页的标题改了，直接这样就可以了：</p>
+<p>document.title = ‘how to make love’;</p>
+<p>这个 API 使得在网页被下载到浏览器之后改变网页的内容成为可能。<br><strong>document</strong><br>当浏览器下载到一个网页，通常是 HTML，这个 HTML 就叫 document（当然，这也是 DOM 树中的一个 node），从上图可以看到，document 通常是整个 DOM 树的根节点。这个 document 包含了标题（document.title）、URL（document.URL）等属性，可以直接在 JS 中访问到。<br>在一个浏览器窗口中可能有多个 document，例如，通过 iframe 加载的页面，每一个都是一个 document。<br>在 JS 中，可以通过 document 访问其子节点（其实任何节点都可以），如</p>
+<p>document.body;document.getElementById(‘xxx’);</p>
+<p><strong>BOM</strong></p>
+<p>BOM 是 Browser Object Model，<a href="">浏览器对象模型</a>。</p>
+<p>刚才说过 DOM 是为了操作文档出现的接口，那 BOM 顾名思义其实就是<strong>为了控制浏览器的行为</strong>而出现的接口。<br>浏览器可以做什么呢？比如跳转到另一个页面、前进、后退等等，程序还可能需要获取屏幕的大小之类的参数。<br>所以 BOM 就是为了解决这些事情出现的接口。比如我们要让浏览器跳转到另一个页面，只需要</p>
+<p>location.href = “<a href="http://www.xxxx.com&quot;" target="_blank" rel="noopener">http://www.xxxx.com&quot;</a>;</p>
+<p>这个 location 就是 BOM 里的一个对象。<br><strong>window</strong><br>window 也是 BOM 的一个对象，除去编程意义上的“兜底对象”之外，通过这个对象可以获取窗口位置、确定窗口大小、弹出对话框等等。例如我要关闭当前窗口：</p>
+<p>window.close();</p>
+<p>总结一下题主的问题：<br><strong>DOM 是为了操作文档出现的 API，document 是其的一个对象；BOM 是为了操作浏览器出现的 API，window 是其的一个对象。</strong></p>
+<p> <img src="http://img.blog.csdn.net/20160826135326655?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p><strong>归DOM管的：</strong></p>
+<p>E区（就是你说的document啦。由web开发人员呕心沥血写出来的一个文件夹，里面有index.html，CSS和JS什么鬼的，部署在服务器上，我们可以通过浏览器的地址栏输入URL然后回车将这个document加载到本地，浏览，右键查看源代码等。</p>
+<p><strong>归BOM管的：</strong></p>
+<p>A区（浏览器的标签页，地址栏，搜索栏，书签栏，窗口放大还原关闭按钮，菜单栏等等）</p>
+<p>B区（浏览器的右键菜单）</p>
+<p>C区（document加载时的状态栏，显示http状态码等）</p>
+<p>D区（滚动条scroll bar）</p>
+<p>BOM是浏览器对象模型，DOM是<a href="https://www.baidu.com/s?wd=%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHcvrjTdrH00T1Y4mvn3mWKWmWT4nW99myRv0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvPH6Ln1DzPH0snWR1P1fvn0" target="_blank" rel="noopener">文档对象模型</a>，前者是对浏览器本身进行操作，而后者是对浏览器（可看成容器）内的内容进行操作</p>
+<p><strong>BOM和DOM的结构关系示意图</strong></p>
+<p> <img src="http://img.blog.csdn.net/20160826135345273?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<h1 id="2-文档对象模型-DOM"><a href="#2-文档对象模型-DOM" class="headerlink" title="2.文档对象模型(DOM)"></a><strong>2.文档对象模型(DOM)</strong></h1><p>DOM节点树模型（以HTML DOM树为例）</p>
+<p> <img src="http://img.blog.csdn.net/20160826135409617?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>DOM模型将整个文档（XML文档和HTML文档）看成一个树形结构，</p>
+<p>在DOM中，HTML文档的层次结构被表示为一个树形结构。并用document对象表示该文档，树的每个子节点表示HTML文档中的不同内容。</p>
+<p> 每个载入浏览器的 HTML 文档都会成为Document对象,Document是探索DOM的入口,利用全局变量document可以访问Document对象</p>
+<h2 id="2-1认识DOM"><a href="#2-1认识DOM" class="headerlink" title="2.1认识DOM"></a><strong>2.1认识DOM</strong></h2><p><strong>先看下面代码</strong></p>
+<p> <img src="http://img.blog.csdn.net/20160826135427874?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>将HTML代码分解为DOM节点层次图:</p>
+<p> <img src="http://img.blog.csdn.net/20160826135444664?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>DOM通过创建树来表示文档，描述了处理网页内容的方法和接口，从而使开发者对文档的内容和结构具有空前的控制力，用DOM API可以轻松地删除、添加和替换节点。</p>
+<h3 id="1）节点类型"><a href="#1）节点类型" class="headerlink" title="1）节点类型"></a><strong>1）节点类型</strong></h3><p>DOM规定文档中的每个成分都是一个节点（Node）,HTML文档可以说由节点构成的集合，DOM节点有:</p>
+<ol>
+<li><p>元素节点（Element）：上图中<html>、<body>、<p>等都是元素节点，即标签。</p>
+</body></html></p></li>
+<li><p>文本节点（Text）:向用户展示的内容，如<li>…</li>中的JavaScript、DOM、CSS等文本。</p>
+</li>
+<li><p>属性节点（Attr）:元素属性，元素才有属性,如<a>标签的链接属性href=”<a href="http://www.baidu.com&quot;。" target="_blank" rel="noopener">http://www.baidu.com&quot;。</a></a></p>
+</li>
+</ol>
+<h3 id="1）-DOM节点三大属性（XML-DOM）"><a href="#1）-DOM节点三大属性（XML-DOM）" class="headerlink" title="1） DOM节点三大属性（XML DOM）"></a><strong>1） DOM节点三大属性（XML DOM）</strong></h3><p>1）nodeName：元素节点、属性节点、文本节点分别返回元素的名称、属性的名称和#text的字符串。</p>
+<p>2）nodeType：元素节点、属性节点、文本节点的nodeType值分别为1、2、3.、</p>
+<p>3）nodeValue：元素节点、属性节点、文本节点的返回值分别为null、属性值和文本节点内容。</p>
+<h2 id="2-2-DOM常见操作"><a href="#2-2-DOM常见操作" class="headerlink" title="2.2 DOM常见操作"></a><strong>2.2 DOM常见操作</strong></h2><p>Node为所有节点的父接口，其定义了一组公共的属性和方法，如下：</p>
+<p> <img src="http://img.blog.csdn.net/20160826135508681?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<h3 id="1）获取节点"><a href="#1）获取节点" class="headerlink" title="1）获取节点"></a><strong>1）获取节点</strong></h3><p>① 获取元素节点：通过document对象的三个方法获取</p>
+<p>document.getElementById(“ID”)</p>
+<p>document.getElementByName(“name”)</p>
+<p>document.getElementsByTagName(“p”);</p>
+<p>② 获取属性节点：属性节点附属于元素节点，可通过元素节点的<strong>getAttributeNode(attrName)</strong>方法获取属性节点，也可通过<strong>getAttribute(attrName)</strong>直接获取属性值。（与之相对的是Element接口的setAttribute(attrName , attrValue)方法，如果属性不存在，则直接添加到元素节点上）</p>
+<p>③ 获取文本节点：文本节点为元素节点的子节点，可通过元素节点（Element接口）提供的childnodes()[index] 方法获得。</p>
+<p>childNodes //NodeList，所有子节点的列表</p>
+<p>firstChild //Node，指向在childNodes列表中的第一个节点  </p>
+<p>lastChild //Node，指向在childNodes列表中的最后一个节点  </p>
+<p>parentNode //Node，指向父节点  </p>
+<p>previousSibling /Node，/指向前一个兄弟节点：如果这个节点就是第一个节点，那么该值为 null</p>
+<p>nextSibling //Node，指向后一个兄弟节点：如果这个节点就是最后一个节点，那么该值为null</p>
+<p>hasChildNodes()` //Boolean，当childNodes包含一个或多个节点时，返回真值</p>
+<hr>
+<h3 id="2）改变节点"><a href="#2）改变节点" class="headerlink" title="2）改变节点"></a><strong>2）改变节点</strong></h3><p>① 改变属性节点的值：可以通过属性节点的nodeValue直接修改属性值，也可通过元素节点的setAttribute()方法改变。</p>
+<p>② 改变文本节点的值：通过文本节点的nodeValue直接修改。</p>
+<p>在HTML DOM中，获取和改变元素内容最简单方法是使用元素的innerHTML属性（innerText属性返回去掉标签的innerHTML）</p>
+<p><strong>拓展:</strong></p>
+<p>innerText、innerHTML、outerHTML、outerText</p>
+<p>innerText: 表示起始标签和结束标签之间的文本</p>
+<p>innerHTML: 表示元素的所有元素和文本的HTML代码</p>
+<p>如：<div><b>Hello</b> world</div>的innerText为Hello world，innerHTML为Hello world</p>
+<p>outerText: 与前者的区别是替换的是整个目标节点，问题返回和innerText一样的内容</p>
+<p>outerHTML: 与前者的区别是替换的是整个目标节点，返回元素完整的HTML代码，包括元素本身</p>
+<p>一张图了解OUTHTML和innerText、innerHTML：</p>
+<p> <img src="http://img.blog.csdn.net/20160826135542094?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>改变HTML样式（style属性）：element.style.color =“red”;</p>
+<h3 id="3）删除节点"><a href="#3）删除节点" class="headerlink" title="3）删除节点"></a><strong>3）删除节点</strong></h3><p>① 删除元素节点：要想删除元素节点A，需获得A的父节点B，父节点可通过17.1.1中的方法获得，也可以直接通过A的parentNode属性获得（推荐）。调用B的removeChild(A)即可删除A节点。</p>
+<p>② 删除属性节点：可通过属性节点所属的元素节点的removeAttribute(attrName)或removeAttributeNode(node)删除。</p>
+<p>③ 清空文本节点：最简单也是最常用的方法就是直接设置文本节点的nameNode属性为空串：textNode.nodeValue =””。</p>
+<p><strong>混淆点:</strong></p>
+<p><strong><p id="example" title="texts"></p></strong></p>
+<p><strong>  这是一段文本</strong></p>
+<p><strong>  <span></span></strong></p>
+<p><strong></strong></p><p></p>
+<p>var p = document.getElementById(‘example’);</p>
+<p>p.nodeValue //null,p是元素节点，所以nodeValue为null</p>
+<p>p.getAttributeNode(‘id’).nodeValue  //example，这里获取到p的id属性的属性节点，nodeValue就是它的属性值</p>
+<p>p.childNodes[0].nodeValue   //这是一段文本,</p>
+<p>p是含有两个子节点的，插入的文本虽然没有标签，但它依然是一个节点。</p>
+<p>其类型是是文本节点，其nodeValue是就是写入在其中的字符串，包含换行和缩进</p>
+<p>p.innerHTML//这是一段文本 <span></span>“</p>
+<p>这里innerHTML返回了p所包含的全部的节点的所包含的各种值了，以字符串的形式。</p>
+<h3 id="4）创建和添加节点"><a href="#4）创建和添加节点" class="headerlink" title="4）创建和添加节点"></a><strong>4）创建和添加节点</strong></h3><p>① 创建节点：通过document对象的createElement(eleName)、createTextNode(nodeValue)方法可分别创建元素节点和文本节点。属性节点也有自己的create方法，但是用的少，直接用元素节点的setAttribute()方法即可添加属性。</p>
+<p>② 添加节点：两个重要的方法：appendChild()和insertBefore()，具体见Node接口中的方法。</p>
+<p>扩展：上面的两个方法都是在已知父节点时用到的，也可以直接在兄弟节点后添加新节点：x.insertBefore(newNode)和x.appendChild(newNode)都可以向x后追加一个新的子节点。</p>
+<h3 id="5）替换节点"><a href="#5）替换节点" class="headerlink" title="5）替换节点"></a><strong>5）替换节点</strong></h3><p>主要掌握replaceChild(newNode , oldNode) 替换元素节点。（属性节点和文本节点有更简单的方法）</p>
+<hr>
+<h2 id="2-3-DOM事件"><a href="#2-3-DOM事件" class="headerlink" title="2.3 DOM事件"></a><strong>2.3 DOM事件</strong></h2><p>DOM同时两种事件模型：冒泡型事件和捕获型事件</p>
+<p>冒泡型事件：事件按照从最特定的事件目标到最不特定的事件目标的顺序触发</p>
+<body onclick="handleClick()"><br><br>  <div onclick="handleClick()">Click Me</div><br><br></body>
+
+<p>触发的顺序是：div、body、html(IE 6.0和Mozilla 1.0)、document、window(Mozilla 1.0)</p>
+<p>捕获型事件：与冒泡事件相反的过程，事件从最不精确的对象开始触发，然后到最精确</p>
+<p>上面例子触发的顺序是：document、div</p>
+<p>DOM事件模型最独特的性质是，文本节点也触发事件(在IE中不会)。</p>
+<h3 id="1）事件处理函数-监听函数"><a href="#1）事件处理函数-监听函数" class="headerlink" title="1）事件处理函数/监听函数"></a><strong>1）事件处理函数/监听函数</strong></h3><p><strong>在JavaScript中：</strong></p>
+<p>var oDiv = document.getElementById(“div1”);</p>
+<p>oDiv.onclick = function(){ //onclick只能用小写</p>
+<p>   alert(“Clicked!”);</p>
+<p>}</p>
+<p>或者</p>
+<p>var elem =document.getElementById(“id”)</p>
+<p>elem.onmouseover=handleMouseOver  //handleMouseOver  是函数名</p>
+<p>Function handleMouseOve(e){…}</p>
+<p><strong>在HTML中：</strong></p>
+&lt;div onclick=”javascript: alert(“Clicked!”)”&gt; //onclick大小写任意<br><br><strong>扩展:</strong><br><br>IE事件处理程序attachEvent()和detachEvent()<br><br>在IE中，每个元素和window对象都有两个方法：attachEvent()和detachEvent()，这两个方法接受两个相同的参数，事件处理程序名称和事件处理程序函数，如：<br><br>[object].attachEvent(“name_of_event_handler”,”function_to_attach”)<br><br>[object].detachEvent(“name_of_event_handler”,”function_to_remove”)<br><br>var fnClick = function(){<br><br>  alert(“Clicked!”);<br><br>}<br><br>oDiv.attachEvent(“onclick”, fnClick); //添加事件处理函数<br><br>oDiv.attachEvent(“onclick”, fnClickAnother); // 可以添加多个事件处理函数<br><br>oDiv.detachEvent(“onclick”, fnClick); //移除事件处理函数<br><br>在使用attachEvent()方法的情况下，事件处理程序会在全局作用域中运行，因此this等于window。<br><br>### <strong>2）跨浏览器的事件处理程序</strong><br><br>addHandler()和removeHandler()<br><br>addHandler()方法属于一个叫EventUntil()的对象，这两个方法均接受三个相同的参数，要操作的元素，事件名称和事件处理程序函数。<br><br>### <strong>3）事件类型</strong><br><br> 鼠标事件：click、dbclick、mousedown、mouseup、mouseover、mouseout、mousemove<br><br> 键盘事件：keydown、keypress、keyup<br><br> HTML事件：load、unload、abort、error、select、change、submit、reset、resize、scroll、focus、blur<br><br>### <strong>4）事件处理器</strong><br><br>执行JavaScript 代码的程序在事件发生时会对事件做出响应。为了响应一个特定事件<br><br>而被执行的代码称为事件处理器。<br><br>在HTML标签中使用事件处理器的语法是：<br><br>&lt;HTML标签 事件处理器=”JavaScript代码’’&gt;<br><br>### <strong>5）事件处理程序</strong><br><br>事件就是用户或浏览器自身执行的某种动作。比如click,mouseup,keydown,mouseover等都是事件的名字。而响应某个事件的函数就叫事件处理程序（事件监听器），事件处理程序以on开头，因此click的事件处理程序就是onclick<br><br>### <strong>6）DOM 0级事件处理程序</strong><br><br>DOM 0级事件处理程序：把一个函数赋值给一个事件的处理程序属性<br><br><input type="button" value="按钮2" id="ben2"><br><br>​     var btn2=document.getElementById(‘btn2’);获得btn2按钮对象<br><br>​     btn2.onclick      //给btn2添加onclick属性，属性又触发了一个事件处理程序<br><br><br><br>btn2.onclick=function(){<br><br>}                    //添加匿名函数<br><br><br><br>btn2.onclick=null      //删除onclick属性<br><br>### <strong>7）DOM 2级事件处理程序</strong><br><br>DOM 2级事件定义了两个方法，用于指定和删除事件处理程序的操作。addEventListener()和removeEventListener()<br><br><br><br><strong>addEventListener()和removeEventListener()</strong><br><br>在DOM中，addEventListener()和removeEventListener()用来分配和移除事件处理函数，与IE不同的是，这些方法需要三个参数：事件名称，要分配的函数和处理函数是用于冒泡阶段(false)还是捕获阶段(true)，默认为冒泡阶段false<br><br>[object].addEventListener(“name_of_event”,fnhander,bcapture)<br><br>[object].removeEventListener(“name_of_event”,fnhander,bcapture)<br><br>var fnClick = function(){<br><br>  alert(“Clicked!”);<br><br>}<br><br>oDiv.addEventListener(“onclick”, fnClick, false); //添加事件处理函数<br><br>oDiv.addEventListener(“onclick”, fnClickAnother, false); // 与IE一样，可以添加多个事件处理函数<br><br><br><br>oDiv.removeEventListener(“onclick”, fnClick, false); //移除事件处理函数<br><br>如果使用addEventListener()将事件处理函数加入到捕获阶段，则必须在removeEventListener()中指明是捕获阶段，才能正确地将这个事件处理函数删除<br><br>oDiv.onclick = fnClick;<br><br>oDiv.onclick = fnClickAnother; //使用直接赋值，后续的事件处理函数会覆盖前面的处理函数<br><br>oDiv.onclick = fnClick;<br><br>oDiv.addEventListener(“onclick”, fnClickAnother, false); //会按顺序进行调用，不会覆盖<br><br><br><br># <strong>3.浏览器对象模型(BOM)</strong><br><br>BOM的核心是window，而window对象又具有双重角色，它既是通过js访问浏览器窗口的一个接口，又是一个Global（全局）对象。这意味着在网页中定义的任何对象，变量和函数，都以window作为其global对象。<br><br><img src="http://img.blog.csdn.net/20160826135621714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"><br><br>## <strong>3.1Window对象</strong><br><br>Window 对象是 JavaScript层级中的顶层对象。<br><br>Window 对象代表一个浏览器窗口或一个框架。<br><br>Window 对象会在 <body>或<frameset>每次出现时被自动创建。<br><br><br><br>### <strong>1）对象属性</strong><br><br>window //窗户自身, window=window.self可使用全局属性window访问　Window对象<br><br>document 对 Document 对象的只读引用。请参阅Document对象。<br><br>history 对 History 对象的只读引用。请参数History对象。<br><br>location 用于窗口或框架的 Location 对象。请参阅Location对象。<br><br>screen 对 Screen 对象的只读引用。请参数Screen对象。<br><br>navigator 对 Navigator 对象的只读引用。请参数Navigator对象。<br><br>defaultStatus 设置或返回窗口状态栏中的默认文本。<br><br>innerheight 返回窗口的文档显示区的高度。<br><br>innerwidth 返回窗口的文档显示区的宽度。<br><br>outerheight 返回窗口的外部高度。<br><br>outerwidth 返回窗口的外部宽度。<br><br>pageXOffset 设置或返回当前页面相对于窗口显示区左上角的 X 位置。<br><br>pageYOffset 设置或返回当前页面相对于窗口显示区左上角的 Y 位置。<br><br>name 设置或返回窗口的名称。<br><br>parent 返回父窗口。<br><br>top 返回最顶层的先辈窗口。<br><br>status 设置窗口状态栏的文本。<br><br>window.location //URL地址，配备布置这个属性可以打开新的页面<br><br>### <strong>2）对象方法</strong><br><br>window.close(); //关闭窗口<br><br>window.alert(“message”); //弹出一个具有OK按钮的系统消息框，显示指定的文本<br><br>window.confirm(“Are you sure?”); //弹出一个具有OK和Cancel按钮的询问对话框，返回一个布尔值<br><br>window.prompt(“What’s your name?”, “Default”); //提示用户输入信息，接受两个参数，即要显示给用户的文本和文本框中的默认值，将文本框中的值作为函数值返回<br><br>window.status //可以使状态栏的文本暂时改变<br><br>window.defaultStatus //默认的状态栏信息，可在用户离开当前页面前一直改变文本<br><br>window.setTimeout(“alert(‘xxx’)”, 1000); //设置在指定的毫秒数后执行指定的代码，接受2个参数，要执行的代码和等待的毫秒数<br><br>window.clearTimeout(“ID”); //取消还未执行的暂停，将暂停ID传递给它<br><br>window.setInterval(function, 1000); //无限次地每隔指定的时间段重复一次指定的代码，参数同setTimeout()一样<br><br>window.clearInterval(“ID”); //取消时间间隔，将间隔ID传递给它<br><br>window.history.go(-1); //访问浏览器窗口的历史，负数为后退，正数为前进<br><br>window.history.back(); //同上<br><br>window.history.forward(); //同上<br><br>window.history.length //可以查看历史中的页面数<br><br>clearInterval() 取消由 setInterval() 设置的timeout。<br><br>clearTimeout() 取消由 setTimeout() 方法设置的timeout。<br><br>createPopup() 创建一个 pop-up 窗口。<br><br>moveBy() 可相对窗口的当前坐标把它移动指定的像素。<br><br>moveTo() 把窗口的左上角移动到一个指定的坐标。<br><br>open() 打开一个新的浏览器窗口或查找一个已命名的窗口。<br><br>print() 打印当前窗口的内容。<br><br>resizeBy() 按照指定的像素调整窗口的大小。<br><br>resizeTo() 把窗口的大小调整到指定的宽度和高度。<br><br>scrollBy() 按照指定的像素值来滚动内容。<br><br>scrollTo() 把内容滚动到指定的坐标。<br><br>setInterval() 按照指定的周期（以毫秒计）来调用函数或计算表达式。<br><br>setTimeout(方法,秒数) 在指定的毫秒数后调用函数或计算表达式。　<br><br>timeOutEvent = setTimeout(“longPress(‘“ + obj + “‘)”,1500);定时器传参数<br><br>### <strong>3）成员对象</strong><br><br>window.event<br><br>window.document //见document对象详解<br><br>window.history<br><br>window.screen<br><br>window.navigator<br><br>Window.external<br><br><strong>扩展</strong><br><br>① 如果文档包含框架（frame 或iframe标签），浏览器会为HTML文档创建一个window对象，并为每个框架创建一个额外的window对象。<br><br><br><br>② window.frames 返回窗口中所有命名的框架<br><br><br><br>③parent是父窗口（如果窗口是顶级窗口，那么parent==self==top）<br><br><br><br>top是最顶级父窗口（有的窗口中套了好几层frameset或者iframe）<br><br><br><br>self是当前窗口（等价window）<br><br><br><br>opener是用open方法打开当前窗口的那个窗口<br><br><br><br>④与消息框有关的方法：alert(String)、confirm(String)、prompt(String)<br><br><br><br>⑤两种定时器：setTimeout(code,latency) 和setInterval(code,period)<br><br><br><br>注：setTimeout只执行一次code，如果要多次调用，可以让code自身再次调用setTimeout()；setInteval()会不停地调用code，直到clearInterval()被调用。<br><br>## <strong>3.2 history对象</strong><br><br>　　window.history.length //浏览过的页面数<br><br>history.back() //在浏览历史里后退一步<br><br>history.forward() //在浏览历史里前进一步<br><br>　　history.go(i) //到汗青详细登记单的第i位<br><br>　　//i&gt;0进步,i&lt;0撤退退却<br><br>　　————————————————– ——————-<br><br>## <strong>3.3 screen对象</strong><br><br>screen对象：用于获取某些关于用户屏幕的信息，也可用window.screen引用它<br><br>​    window.screen.width //屏幕宽度<br><br>　　window.screen.height //屏幕高度<br><br>　　window.screen.colorDepth //屏幕颜色深度<br><br>　　window.screen.availWidth //可用宽度(除去任务栏的高度)<br><br>　　window.screen.availHeight //可用高度(除去任务栏的高度)<br><br>　　————————————————– ——————-<br><br>## <strong>3.4 external对象</strong><br><br>　　window.external.AddFavorite(“地址”,”标题” ) //把网站新增到保藏夹<br><br>　　————————————————– ——————-<br><br>## <strong>3.5 navigator对象</strong><br><br>navigator<code>对象：包含大量有关Web浏览器的信息，在检测浏览器及操作系统上非常有用
+
+　　window.navigator.appCodeName //浏览器代码名
+
+　　window.navigator.appName //浏览器步伐名
+
+　　window.navigator.appMinorVersion //浏览器补钉版本
+
+　　window.navigator.cpuClass //cpu类型x86
+
+　　window.navigator.platform //操作体系类型win32
+
+　　window.navigator.plugins
+
+　　window.navigator.opsProfile
+
+　　window.navigator.userProfile
+
+　　window.navigator.systemLanguage //客户体系语言zh-cn简体中文
+
+　　window.navigator.userLanguage //用户语言,同上
+
+　　window.navigator.appVersion //浏览器版本(包括 体系版本)
+
+　　window.navigator.userAgent//用户代理头的字符串表示
+
+　　window.navigator.onLine //用户否在线
+
+　　window.navigator.cookieEnabled //浏览器是否撑持cookie
+
+　　window.navigator.mimeTypes
+
+
+
+
+
+
+
+## **3.6 Document对象**
+
+### **1）对象属性**
+
+document.body//提供对 &lt;body&gt;元素的直接访问。对于定义了框架集的文档，该属性引用最外层的&lt;frameset&gt;。
+
+document.cookie 返回与当前文档有关的所有 cookie。
+
+document.title //返回文档标题等价于HTML的title标签
+
+document.domain 返回当前文档的域名。
+
+document.bgColor //返回页面背景色
+
+document.fgColor //返回前景色(文本颜色)
+
+document.linkColor //未点击过的链接颜色
+
+document.alinkColor //激活链接(焦点在此链接上)的颜色
+
+document.vlinkColor //已点击过的链接颜色
+
+document.URL //设置URL属性从而在同一窗口打开另一网页
+
+document.fileCreatedDate //文件建立日期，只读属性
+
+document.fileModifiedDate //文件修改日期，只读属性
+
+document.lastModified **返回文档被最后修改的日期和时间**。
+
+document.fileSize //文件大小，只读属性
+
+document.cookie //设置和读出cookie
+
+document.charset //返回字符集 简体中文:gb2312
+
+document.URL 返回当前文档的 URL。
+
+document.referrer 返回载入当前文档的文档的 URL。
+
+document.styleSheets 返回样式表的集合,返回值CSSStyleSheet[]
+
+document.styleSheets[0].cssRules.style.paddingTop=”10px”设置样式,样式名去掉连字符,
+
+### **2）常用对象方法**
+
+document.write() //动态向页面写入内容
+
+document.writeln() 等同于 write() 方法，不同的是在每个表达式之后写一个换行符。
+
+document.createElement(&lt;Tag&gt;) //用指定标签类型创建一个新的element对象)
+
+document.getElementById(ID) //获得指定ID值的对象
+
+document.getElementsByName(Name) //获得指定Name值的对象
+
+getElementsByTagName() 返回带有指定标签名的对象集合。
+
+document.body.appendChild(oTag)
+
+———————————————————————
+
+### **3）body-主体子对象**
+
+document.body //指定文档主体的开始和结束等价于body&gt;/body&gt;
+
+document.body.bgColor //设置或获取对象后面的背景颜色
+
+document.body.link //未点击过的链接颜色
+
+document.body.alink //激活链接(焦点在此链接上)的颜色
+
+document.body.vlink //已点击过的链接颜色
+
+document.body.text //文本色
+
+document.body.innerText //设置body&gt;…/body&gt;之间的文本
+
+document.body.innerHTML //设置body&gt;…/body&gt;之间的HTML代码
+
+document.body.topMargin //页面上边距
+
+document.body.leftMargin //页面左边距
+
+document.body.rightMargin //页面右边距
+
+document.body.bottomMargin //页面下边距
+
+document.body.background //背景图片
+
+document.body.appendChild(oTag) //动态生成一个HTML对象
+
+### **4）常用对象事件**
+
+document.body.onclick=”func()”//鼠标指针单击对象是触发
+
+document.body.onmouseover=”func()”//鼠标指针移到对象时触发
+
+document.body.onmouseout=”func()”//鼠标指针移出对象时触发
+
+———————————————————————
+
+### **5）location-位置子对象**
+
+location对象：表示载入窗口的URL，也可用window.location引用它
+
+location.href //当前载入页面的完整URL，如http://www.somewhere.com/pictures/index.htm
+
+location.portocol //URL中使用的协议，即双斜杠之前的部分，如http
+
+location.host //服务器的名字，如www.wrox.com
+
+location.hostname //通常等于host，有时会省略前面的www
+
+location.port //URL声明的请求的端口，默认情况下，大多数URL没有端口信息，如8080
+
+location.pathname //URL中主机名后的部分，如/pictures/index.htm
+
+location.search //执行GET请求的URL中的问号后的部分，又称查询字符串，如?param=xxxx
+
+location.hash //如果URL包含#，返回该符号之后的内容，如#anchor1
+
+location.assign(&quot;http:www.baidu.com&quot;); //同location.href，新地址都会被加到浏览器的历史栈中
+
+location.replace(&quot;http:www.baidu.com&quot;); //同assign()，但新地址不会被加到浏览器的历史栈中，不能通过back和forward访问
+
+location.reload(true | false); //重新载入当前页面，为false时从浏览器缓存中重载，为true时从服务器端重载，默认为false
+
+document.location.reload(URL) //打开新的网页
+
+### **6）selection-选区子对象**
+
+document.selection
+
+### **7）forms集合(页面中的表单)**
+
+a)通过集合引用
+
+document.forms //对应页面上的form标签
+
+document.forms.length //对应页面上/formform标签的个数
+
+document.forms[0] //第1个/formform标签
+
+document.forms[i] //第i-1个/formform标签
+
+document.forms[i].length //第i-1个/formform中的控件数
+
+document.forms[i].elements[j] //第i-1个/formform中第j-1个控件
+
+b)通过标签name属性直接引用
+
+/formform name=”Myform”&gt;input name=”myctrl”/&gt;/form
+
+document.Myform.myctrl //document.表单名.控件名
+
+c)访问表单的属性
+
+document.forms[i].name //对应form name&gt;属性
+
+document.forms[i].action //对应/formform action&gt;属性
+
+document.forms[i].encoding //对应/formform enctype&gt;属性
+
+document.forms[i].target //对应/formform target&gt;属性
+
+document.forms[i].appendChild(oTag) //动态插入一个控件
+
+document.all.oDiv //引用图层oDiv
+
+document.all.oDiv.style.display=” //图层设置为可视
+
+document.all.oDiv.style.display=”none”//图层设置为隐藏
+
+document.getElementId(”oDiv”) //通过getElementId引用对象
+
+document.getElementId(”oDiv”).style=”
+
+document.getElementId(”oDiv”).display=”none”
+
+/*document.all表示document中所有对象的集合
+
+只有ie支持此属性，因此也用来判断浏览器的种类*/
+
+....
+
+## **3.7 HTMLElement对象**
+
+**HTML DOM 节点**
+
+在 HTML DOM （文档对象模型）中，每个部分都是节点：
+
+1.文档本身是文档节点
+
+2.所有 HTML元素是元素节点
+
+3.所有 HTML属性是属性节点
+
+4.HTML 元素内的文本是文本节点
+
+5.注释是注释节点
+
+**Element 对象**
+
+在 HTML DOM 中，Element对象表示HTML元素。
+
+Element 对象可以拥有类型为元素节点、文本节点、注释节点的子节点。
+
+NodeList 对象表示节点列表，比如 HTML元素的子节点集合。
+
+元素也可以拥有属性。属性是属性节点
+
+获取
+
+document.getElementById(ID) //获得指定ID值的对象
+
+document.getElementsByName(Name) //获得指定Name值的对象
+
+getElementsByTagName() 返回带有指定标签名的对象集合。
+
+**属性和方法**
+
+方法里有a,b的参数仅仅是为了加深说明,其他元素没有a,b不代表是无参方法
+
+Element.add(&lt;class&gt;)给元素添加指定的类****
+
+element.accessKey 设置或返回元素的快捷键。
+
+element.appendChild() 向元素添加新的子节点，作为最后一个子节点。
+
+element.attributes 返回元素属性的集合。
+
+element.childNodes 返回元素子节点的 NodeList。
+
+element.className 设置或返回元素的 class 属性。
+
+element.clientHeight 返回元素的可见高度。
+
+element.clientWidth 返回元素的可见宽度。
+
+element.cloneNode() 克隆元素。
+
+element.compareDocumentPosition() 比较两个元素的文档位置。
+
+element.contentEditable 设置或返回元素的文本方向。
+
+element.dir 设置或返回元素的文本方向。
+
+element.firstChild 返回元素的首个子。
+
+element.getAttribute() 返回元素节点的指定属性值。
+
+element.getAttributeNode() 返回指定的属性节点。
+
+element.getElementsByTagName() 返回拥有指定标签名的所有子元素的集合。
+
+element.getFeature() 返回实现了指定特性的 API 的某个对象。
+
+element.getUserData() 返回关联元素上键的对象。
+
+Element.hidden获取或设置hidden属性的存在状态
+
+element.hasAttribute() 如果元素拥有指定属性，则返回true，否则返回false。
+
+element.hasAttributes() 如果元素拥有属性，则返回 true，否则返回false。
+
+element.hasChildNodes() 如果元素拥有子节点，则返回 true，否则false。
+
+element.id 设置或返回元素的 id。
+
+element.innerHTML 设置或返回元素的内容。
+
+element.insertBefore(&lt;a&gt;,&lt;b&gt;) 在指定的已有的子节点之前插入新节点。A插到b前
+
+element.isContentEditable 设置或返回元素的内容。
+
+element.isDefaultNamespace() 如果指定的 namespaceURI是默认的，则返回true，否则返回false。
+
+element.isEqualNode(&lt;a&gt;) 检查a元素是否与当前元素相等。
+
+element.isSameNode(a) 检查指定元素是否就是当前元素.
+
+element.isSupported() 如果元素支持指定特性，则返回 true。
+
+element.lang 设置或返回元素的语言代码。
+
+element.lastChild 返回元素的最后一个子元素。
+
+element.namespaceURI 返回元素的 namespace URI。
+
+element.nextSibling 返回当前元素之后的兄弟元素
+
+element.nodeName 返回元素的名称。
+
+element.nodeType 返回元素的节点类型。
+
+element.nodeValue 设置或返回元素值。
+
+element.normalize() 合并元素中相邻的文本节点，并移除空的文本节点。
+
+element.offsetHeight 返回元素的高度。
+
+element.offsetWidth 返回元素的宽度。
+
+element.offsetLeft 返回元素的水平偏移位置。
+
+element.offsetParent 返回元素的偏移容器。
+
+element.offsetTop 返回元素的垂直偏移位置。
+
+element.ownerDocument 返回元素的根元素（文档对象）。
+
+element.parentNode 返回元素的父节点。
+
+element.previousSibling 返回当前元素之前的兄弟元素
+
+Element.remove(&lt;class&gt;) 从元素移除指定的类
+
+element.removeAttribute() 从元素中移除指定属性。
+
+element.removeAttributeNode() 移除指定的属性节点，并返回被移除的节点。
+
+element.removeChild(a) 从元素中移除子节点。
+
+element.replaceChild(a,b) 替换元素中的子节点。
+
+element.scrollHeight 返回元素的整体高度。
+
+element.scrollLeft 返回元素左边缘与视图之间的距离。
+
+element.scrollTop 返回元素上边缘与视图之间的距离。
+
+element.scrollWidth 返回元素的整体宽度。
+
+element.setAttribute() 把指定属性设置或更改为指定值。
+
+element.setAttributeNode() 设置或更改指定属性节点。
+
+element.setIdAttribute()
+
+element.setIdAttributeNode()
+
+element.setUserData() 把对象关联到元素上的键。
+
+element.style 设置或返回元素的 style 属性。
+
+Element.toggle(&lt;class&gt;)如果类不存在就添加它存在就移除它
+
+element.tabIndex 设置或返回元素的 tab 键控制次序。
+
+element.tagName 返回元素的标签名。
+
+element.textContent 设置或返回节点及其后代的文本内容。
+
+element.title 设置或返回元素的 title 属性。
+
+element.toString() 把元素转换为字符串。
+
+nodelist.item() 返回 NodeList 中位于指定下标的节点。
+
+nodelist.length 返回 NodeList 中的节点数。
+
+
+
+element.addEventListener(event, function, useCapture)
+
+| 参数       | 描述                                                         |
+| ---------- | ------------------------------------------------------------ |
+| event      | 必须。字符串，指定事件名。注意: 不要使用&quot;on&quot;前缀。 例如，使用&quot;click&quot; ,而不是使用&quot;onclick&quot;。提示： 所有 HTML DOM 事件，可以查看我们完整的HTML DOM Event对象参考手册。 |
+| function   | 必须。指定要事件触发时执行的函数。当**事件对象**会作为第一个参数传入函数。 事件对象的类型取决于特定的事件。例如， &quot;click&quot; 事件属于 MouseEvent(鼠标事件)对象。 |
+| useCapture | 可选。布尔值，指定事件是否在捕获或冒泡阶段执行。可能值:true - 事件句柄在捕获阶段执行false- false- 默认。事件句柄在冒泡阶段执行 |
+
+contentWindow 属性
+
+如果文档里有iframe属性利用此属性可以返回iframe的内容
+
+### **1）Table 对象**
+
+ ![img](http://img.blog.csdn.net/20160826135729340?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+![img](http://img.blog.csdn.net/20160826135744860?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+
+
+rows 集合返回表格中所有行（TableRow对象）的一个数组，该集合包括&lt;thead&gt;、&lt;tfoot&gt;和&lt;tbody&gt;中定义的所有行
+
+TableRow 对象
+
+TableRow 对象代表一个HTML表格行。
+
+在 HTML 文档中 &lt;tr&gt; 标签每出现一次，一个 TableRow对象就会被创建。
+
+TableRow 对象集合
+
+| **集合** | **描述**                           | **IE** | **F** | **O** | **W3C** |
+| -------- | ---------------------------------- | ------ | ----- | ----- | ------- |
+| cells[]  | 返回包含行中所有单元格的一个数组。 | 4      | 1     | 9     | Yes     |
+
+
+
+cells 集合返回表格中所有 &lt;td&gt;或&lt;th&gt;元素。
+
+TableCell 对象代表一个HTML [表格单元格](http://baike.baidu.com/view/1266997.htm)。
+
+在一个 HTML 文档中 &lt;td&gt; 标签每出现一次，一个 TableCell对象就会被创建
+
+## **3.8 Event对象**
+
+### **1）Event对象的常用属性**
+
+| 名称   | 说明                  | 返回        |
+| ------ | --------------------- | ----------- |
+| type   | 事件的名称如mouseover | 字符串      |
+| target | 事件指向的元素        | HTMLElement |
+
+### **2）Window 事件属性**
+
+**(没加蓝的都是h 5新事件)**
+
+针对 window 对象触发的事件（应用到&lt;body&gt;标签）：
+
+属性
+
+onafterprint    文档打印之后运行的脚本。
+
+onbeforeprint 文档打印之前运行的脚本。
+
+onbeforeunload 文档卸载之前运行的脚本。
+
+onerror 在错误发生时运行的脚本。
+
+onhaschange 当文档已改变时运行的脚本。
+
+onload 页面结束加载之后触发。
+
+**onmessage 在消息被触发时运行的脚本。**
+
+可以使用调用 postMessage ()向主线程发送消息,在某些场景下，业务调用方可能需要主动跟定位组件通信,可以通过html5 postMessage的方式主动与定位组件发起通信****
+
+onoffline 当文档离线时运行的脚本。
+
+ononline 当文档上线时运行的脚本。
+
+onpagehide 当窗口隐藏时运行的脚本。
+
+onpageshow 当窗口成为可见时运行的脚本。
+
+onpopstate 当窗口历史记录改变时运行的脚本。
+
+onredo 当文档执行撤销（redo）时运行的脚本。
+
+onresize 当浏览器窗口被调整大小时触发。
+
+onstorage 在 Web Storage 区域更新后运行的脚本。
+
+onundo 在文档执行 undo 时运行的脚本。
+
+onunload 一旦页面已下载时触发（或者浏览器窗口已被关闭）。
+
+### **3）Form 事件**
+
+由 HTML 表单内的动作触发的事件（应用到几乎所有HTML元素，但最常用在form元素中）：
+
+属性
+
+onblur 元素失去焦点时运行的脚本。
+
+onchange在元素值被改变时运行的脚本。
+
+oncontextmenu 当上下文菜单被触发时运行的脚本。
+
+onfocus 当元素失去焦点时运行的脚本。
+
+onformchange 在表单改变时运行的脚本。
+
+onforminput 当表单获得用户输入时运行的脚本。
+
+oninput 当元素获得用户输入时运行的脚本。
+
+oninvalid 当元素无效时运行的脚本。
+
+onreset 当表单中的重置按钮被点击时触发。HTML5中不支持。
+
+onselect 在元素中文本被选中后触发。
+
+onsubmit 在提交表单时触发。
+
+### **4）oninput,onpropertychange,onchange的用法**
+
+**oninput:**
+
+oninput 事件在用户输入时触发。
+
+该事件在 &lt;input&gt; 或&lt;textarea&gt;元素的值发生改变时触发。
+
+提示： 该事件类似于 onchange 事件。不同之处在于oninput事件在元素值发生变化是立即触发，onchange在元素失去焦点时触发。另外一点不同是onchange事件也可以作用于&lt;keygen&gt;和&lt;select&gt;元素。
+
+**onchange**
+
+onchange 事件会在域的内容改变时发生。
+
+onchange 事件也可用于单选框与复选框改变后触发的事件。
+
+** **
+
+**onchange**触发事件必须满足两个条件：
+
+a）当前对象属性改变，并且是由键盘或鼠标事件激发的（脚本触发无效）
+
+b）当前对象失去焦点(onblur)；
+
+**onpropertychange**的话，只要当前对象属性发生改变，都会触发事件，但是它是IE专属的；
+
+**oninput**是onpropertychange的非IE浏览器版本，支持firefox和opera等浏览器，但有一点不同，它绑定于对象时，并非该对象所有属性改变都能触发事件，它只在对象value值发生改变时奏效。
+
+在textarea中，如果想捕获用户的键盘输入，用onkeyup检查事件就可以了，但是onkeyup并不支持复制和粘贴，因此需要动态监测textarea中值的变化，这就需要**onpropertychange**（用在IE浏览器）和oninput（非IE浏览器）结合在一起使用了。
+
+
+
+### **5）移动端 触摸事件**
+
+ ontouchstart、ontouchmove、ontouchend、ontouchcancel
+
+**1、Touch事件简介**
+
+pc上的web页面鼠 标会产生onmousedown、onmouseup、onmouseout、onmouseover、onmousemove的事件，但是在移动终端如iphone、ipod  Touch、ipad上的web页面触屏时会产生ontouchstart、ontouchmove、ontouchend、ontouchcancel事件，分别对应了触屏开始、拖拽及完成触屏事件和取消。
+
+当按下手指时，触发ontouchstart；
+
+当移动手指时，触发ontouchmove；
+
+当移走手指时，触发ontouchend。
+
+当一些更高级别的事件发生的时候（如电话接入或者弹出信息）会取消当前的touch操作，即触发ontouchcancel。一般会在ontouchcancel时暂停游戏、存档等操作。
+
+
+
+**2、Touch事件与Mouse事件的出发关系**
+
+在触屏操作后，手指提起的一刹那（即发生ontouchend后），系统会判断接收到事件的element的内容是否被改变，如果内容被改变，接下来的事 件都不会触发，如果没有改变，会按照mousedown，mouseup，click的顺序触发事件。特别需要提到的是，只有再触发一个触屏事件时，才会 触发上一个事件的mouseout事件。
+
+## **4. DOM基本操作思维导图**
+
+ ![img](http://img.blog.csdn.net/20160826135824498?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+** **
+
+
+
+## **5. window对象思维导图**
+
+ ![img](http://img.blog.csdn.net/20160826135845358?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+ **1.Javascript组成**
+
+**JavaScript的实现包括以下3个部分：**
+
+1）核心（ECMAScript）：描述了JS的**语法和基本对象**。
+
+2）文档对象模型 （DOM）：**处理网页内容**的方法和接口
+
+3）浏览器对象模型（BOM）：**与浏览器交互**的方法和接口
+
+
+
+**ECMAScript扩展知识：**
+
+① ECMAScript是一个标准，JS只是它的一个实现，其他实现包括ActionScript。
+
+② “ECMAScript可以为不同种类的宿主环境提供核心的脚本编程能力……”，即ECMAScript不与具体的宿主环境相绑定，如JS的宿主环境是浏览器，AS的宿主环境是Flash。
+
+③ECMAScript描述了以下内容：语法、类型、语句、关键字、保留字、运算符、对象。
+
+ ![img](http://img.blog.csdn.net/20160826135215646?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+[有关JS对象基础讲解的的另一篇博文](http://blog.csdn.net/qq877507054/article/details/52541956)
+
+
+
+我们都知道， javascript 有三部分构成，ECMAScript，DOM和BOM，根据宿主（浏览器）的不同，具体的表现形式也不尽相同，ie和其他的浏览器风格迥异。
+
+\1. DOM 是 W3C的标准；[所有浏览器公共遵守的标准]
+\2. BOM 是 各个浏览器厂商根据 DOM
+在各自浏览器上的实现;[表现为不同浏览器定义有差别,实现方式不同]
+\3. window 是 BOM对象，而非js对象；
+
+DOM（文档对象模型）是 HTML 和 XML 的应用程序接口（API）。
+
+BOM 主要处理浏览器窗口和框架，不过通常浏览器特定的 JavaScript 扩展都被看做 BOM 的一部分。这些扩展包括：
+
+弹出新的浏览器窗口
+
+移动、关闭浏览器窗口以及调整窗口大小
+
+提供 Web 浏览器详细信息的定位对象
+
+提供用户屏幕分辨率详细信息的屏幕对象
+
+对 cookie 的支持
+
+IE 扩展了 BOM，加入了ActiveXObject类，可以通过JavaScript实例化ActiveX对象
+
+javacsript是通过访问BOM（Browser Object Model）对象来访问、控制、修改客户端(浏览器)，由于BOM的window包含了document，window对象的属性和方法是直接可以使用而且被感知的，因此可以直接使用window对象的document属性，通过document属性就可以访问、检索、修改XHTML文档内容与结构。因为document对象又是DOM（Document Object Model）模型的根节点。可以说，BOM包含了DOM(对象)，浏览器提供出来给予访问的是BOM对象，从BOM对象再访问到DOM对象，从而js可以操作浏览器以及浏览器读取到的文档。其中
+DOM包含：window
+
+Window对象包含属性：document、location、navigator、screen、history、frames
+
+Document根节点包含子节点：forms、location、anchors、images、links
+
+从window.document已然可以看出，DOM的最根本的对象是BOM的window对象的子对象。
+
+**区别**：DOM描述了处理网页内容的方法和接口，BOM描述了与浏览器进行交互的方法和接口
+
+
+
+
+
+## **1.1 DOM, DOCUMENT, BOM, WINDOW 区别**
+
+DOM 全称是 Document Object Model，也就是文档对象模型。是针对XML的基于树的API。描述了处理网页内容的方法和接口，是HTML和XML的API，DOM把整个页面规划成由节点层级构成的文档。针对XHTML和HTML的DOM。这个DOM定义了一个HTMLDocument和HTMLElement做为这种实现的基础,就是说**为了能以编程的方法操作这个 HTML 的内容**（比如添加某些元素、修改元素的内容、删除某些元素），我们把这个 HTML 看做一个对象树（DOM树），它本身和里面的所有东西比如 &lt;div&gt;&lt;/div&gt; 这些标签都看做一个对象，每个对象都叫做一个节点（node），节点可以理解为 DOM 中所有 Object 的父类。
+
+ ![img](http://img.blog.csdn.net/20160826135305647?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+
+
+DOM 有什么用？就是为了操作 HTML 中的元素，比如说我们要通过 JS 把这个网页的标题改了，直接这样就可以了：
+
+document.title = &#39;how to make love&#39;;
+
+这个 API 使得在网页被下载到浏览器之后改变网页的内容成为可能。
+**document**
+当浏览器下载到一个网页，通常是 HTML，这个 HTML 就叫 document（当然，这也是 DOM 树中的一个 node），从上图可以看到，document 通常是整个 DOM 树的根节点。这个 document 包含了标题（document.title）、URL（document.URL）等属性，可以直接在 JS 中访问到。
+在一个浏览器窗口中可能有多个 document，例如，通过 iframe 加载的页面，每一个都是一个 document。
+在 JS 中，可以通过 document 访问其子节点（其实任何节点都可以），如
+
+document.body;document.getElementById(&#39;xxx&#39;);
+
+**BOM**
+
+BOM 是 Browser Object Model，[浏览器对象模型]()。
+
+刚才说过 DOM 是为了操作文档出现的接口，那 BOM 顾名思义其实就是**为了控制浏览器的行为**而出现的接口。
+浏览器可以做什么呢？比如跳转到另一个页面、前进、后退等等，程序还可能需要获取屏幕的大小之类的参数。
+所以 BOM 就是为了解决这些事情出现的接口。比如我们要让浏览器跳转到另一个页面，只需要
+
+location.href = &quot;http://www.xxxx.com&quot;;
+
+这个 location 就是 BOM 里的一个对象。
+**window**
+window 也是 BOM 的一个对象，除去编程意义上的“兜底对象”之外，通过这个对象可以获取窗口位置、确定窗口大小、弹出对话框等等。例如我要关闭当前窗口：
+
+window.close();
+
+总结一下题主的问题：
+**DOM 是为了操作文档出现的 API，document 是其的一个对象；BOM 是为了操作浏览器出现的 API，window 是其的一个对象。**
+
+
+
+ ![img](http://img.blog.csdn.net/20160826135326655?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+**归DOM管的：**
+
+
+
+E区（就是你说的document啦。由web开发人员呕心沥血写出来的一个文件夹，里面有index.html，CSS和JS什么鬼的，部署在服务器上，我们可以通过浏览器的地址栏输入URL然后回车将这个document加载到本地，浏览，右键查看源代码等。
+
+**归BOM管的：**
+
+
+
+A区（浏览器的标签页，地址栏，搜索栏，书签栏，窗口放大还原关闭按钮，菜单栏等等）
+
+
+
+B区（浏览器的右键菜单）
+
+
+
+C区（document加载时的状态栏，显示http状态码等）
+
+
+
+D区（滚动条scroll bar）
+
+BOM是浏览器对象模型，DOM是[文档对象模型](https://www.baidu.com/s?wd=%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHcvrjTdrH00T1Y4mvn3mWKWmWT4nW99myRv0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EnHTvPH6Ln1DzPH0snWR1P1fvn0)，前者是对浏览器本身进行操作，而后者是对浏览器（可看成容器）内的内容进行操作
+
+**BOM和DOM的结构关系示意图**
+
+ ![img](http://img.blog.csdn.net/20160826135345273?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+
+
+# **2.文档对象模型(DOM)**
+
+DOM节点树模型（以HTML DOM树为例）
+
+ ![img](http://img.blog.csdn.net/20160826135409617?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+DOM模型将整个文档（XML文档和HTML文档）看成一个树形结构，
+
+在DOM中，HTML文档的层次结构被表示为一个树形结构。并用document对象表示该文档，树的每个子节点表示HTML文档中的不同内容。
+
+ 每个载入浏览器的 HTML 文档都会成为Document对象,Document是探索DOM的入口,利用全局变量document可以访问Document对象
+
+
+
+## **2.1认识DOM**
+
+**先看下面代码**
+
+ ![img](http://img.blog.csdn.net/20160826135427874?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+将HTML代码分解为DOM节点层次图:
+
+ ![img](http://img.blog.csdn.net/20160826135444664?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+
+
+DOM通过创建树来表示文档，描述了处理网页内容的方法和接口，从而使开发者对文档的内容和结构具有空前的控制力，用DOM API可以轻松地删除、添加和替换节点。
+
+### **1）节点类型**
+
+DOM规定文档中的每个成分都是一个节点（Node）,HTML文档可以说由节点构成的集合，DOM节点有:
+
+1. 元素节点（Element）：上图中&lt;html&gt;、&lt;body&gt;、&lt;p&gt;等都是元素节点，即标签。
+
+2. 文本节点（Text）:向用户展示的内容，如&lt;li&gt;...&lt;/li&gt;中的JavaScript、DOM、CSS等文本。
+
+3. 属性节点（Attr）:元素属性，元素才有属性,如&lt;a&gt;标签的链接属性href=&quot;http://www.baidu.com&quot;。
+
+### **1） DOM节点三大属性（XML DOM）**
+
+1）nodeName：元素节点、属性节点、文本节点分别返回元素的名称、属性的名称和#text的字符串。
+
+2）nodeType：元素节点、属性节点、文本节点的nodeType值分别为1、2、3.、
+
+3）nodeValue：元素节点、属性节点、文本节点的返回值分别为null、属性值和文本节点内容。
+
+## **2.2 DOM常见操作**
+
+Node为所有节点的父接口，其定义了一组公共的属性和方法，如下：
+
+ ![img](http://img.blog.csdn.net/20160826135508681?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
+### **1）获取节点**
+
+① 获取元素节点：通过document对象的三个方法获取
+
+document.getElementById(&quot;ID&quot;)
+
+document.getElementByName(&quot;name&quot;)
+
+document.getElementsByTagName(&quot;p&quot;);
+
+② 获取属性节点：属性节点附属于元素节点，可通过元素节点的**getAttributeNode(attrName)**方法获取属性节点，也可通过**getAttribute(attrName)**直接获取属性值。（与之相对的是Element接口的setAttribute(attrName , attrValue)方法，如果属性不存在，则直接添加到元素节点上）
+
+③ 获取文本节点：文本节点为元素节点的子节点，可通过元素节点（Element接口）提供的childnodes()[index] 方法获得。
+
+childNodes //NodeList，所有子节点的列表
+
+firstChild //Node，指向在childNodes列表中的第一个节点  
+
+lastChild //Node，指向在childNodes列表中的最后一个节点  
+
+parentNode //Node，指向父节点  
+
+previousSibling /Node，/指向前一个兄弟节点：如果这个节点就是第一个节点，那么该值为 null
+
+nextSibling //Node，指向后一个兄弟节点：如果这个节点就是最后一个节点，那么该值为null
+
+hasChildNodes()</code> //Boolean，当childNodes包含一个或多个节点时，返回真值<br><br><br><br><strong> </strong><br><br>### <strong>2）改变节点</strong><br><br>① 改变属性节点的值：可以通过属性节点的nodeValue直接修改属性值，也可通过元素节点的setAttribute()方法改变。<br><br>② 改变文本节点的值：通过文本节点的nodeValue直接修改。<br><br>在HTML DOM中，获取和改变元素内容最简单方法是使用元素的innerHTML属性（innerText属性返回去掉标签的innerHTML）<br><br><strong>拓展:</strong><br><br>innerText、innerHTML、outerHTML、outerText<br><br>innerText: 表示起始标签和结束标签之间的文本<br><br>innerHTML: 表示元素的所有元素和文本的HTML代码<br><br>如：<div><b>Hello</b> world</div>的innerText为Hello world，innerHTML为Hello world<br><br>outerText: 与前者的区别是替换的是整个目标节点，问题返回和innerText一样的内容<br><br>outerHTML: 与前者的区别是替换的是整个目标节点，返回元素完整的HTML代码，包括元素本身<br><br><br><br>一张图了解OUTHTML和innerText、innerHTML：<br><br> <img src="http://img.blog.csdn.net/20160826135542094?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"><br><br>改变HTML样式（style属性）：element.style.color =“red”;<br><br><br><br><br><br>### <strong>3）删除节点</strong><br><br>① 删除元素节点：要想删除元素节点A，需获得A的父节点B，父节点可通过17.1.1中的方法获得，也可以直接通过A的parentNode属性获得（推荐）。调用B的removeChild(A)即可删除A节点。<br><br>② 删除属性节点：可通过属性节点所属的元素节点的removeAttribute(attrName)或removeAttributeNode(node)删除。<br><br>③ 清空文本节点：最简单也是最常用的方法就是直接设置文本节点的nameNode属性为空串：textNode.nodeValue =””。<br><br><strong>混淆点:</strong><br><br><strong><p id="example" title="texts"></p></strong><br><br><strong>  这是一段文本</strong><br><br><strong>  <span></span></strong><br><br><strong><p></p></strong><br><br>var p = document.getElementById(‘example’);<br><br>p.nodeValue //null,p是元素节点，所以nodeValue为null<br><br><br><br>p.getAttributeNode(‘id’).nodeValue  //example，这里获取到p的id属性的属性节点，nodeValue就是它的属性值<br><br><br><br>p.childNodes[0].nodeValue   //这是一段文本,<br><br>p是含有两个子节点的，插入的文本虽然没有标签，但它依然是一个节点。<br><br>其类型是是文本节点，其nodeValue是就是写入在其中的字符串，包含换行和缩进<br><br><br><br>p.innerHTML//这是一段文本 <span></span>“<br><br>这里innerHTML返回了p所包含的全部的节点的所包含的各种值了，以字符串的形式。<br><br><br><br><br><br>### <strong>4）创建和添加节点</strong><br><br>① 创建节点：通过document对象的createElement(eleName)、createTextNode(nodeValue)方法可分别创建元素节点和文本节点。属性节点也有自己的create方法，但是用的少，直接用元素节点的setAttribute()方法即可添加属性。<br><br>② 添加节点：两个重要的方法：appendChild()和insertBefore()，具体见Node接口中的方法。<br><br>扩展：上面的两个方法都是在已知父节点时用到的，也可以直接在兄弟节点后添加新节点：x.insertBefore(newNode)和x.appendChild(newNode)都可以向x后追加一个新的子节点。<br><br>### <strong>5）替换节点</strong><br><br>主要掌握replaceChild(newNode , oldNode) 替换元素节点。（属性节点和文本节点有更简单的方法）<br><br><br><br><br><br><strong> </strong><br><br><br><br>## <strong>2.3 DOM事件</strong><br><br>DOM同时两种事件模型：冒泡型事件和捕获型事件<br><br>冒泡型事件：事件按照从最特定的事件目标到最不特定的事件目标的顺序触发<br><br><body onclick="handleClick()"><br><br>  <div onclick="handleClick()">Click Me</div>
+
+<p></p></body><p></p>
+<p>触发的顺序是：div、body、html(IE 6.0和Mozilla 1.0)、document、window(Mozilla 1.0)</p>
+<p>捕获型事件：与冒泡事件相反的过程，事件从最不精确的对象开始触发，然后到最精确</p>
+<p>上面例子触发的顺序是：document、div</p>
+<p>DOM事件模型最独特的性质是，文本节点也触发事件(在IE中不会)。</p>
+<h3 id="1）事件处理函数-监听函数-1"><a href="#1）事件处理函数-监听函数-1" class="headerlink" title="1）事件处理函数/监听函数"></a><strong>1）事件处理函数/监听函数</strong></h3><p><strong>在JavaScript中：</strong></p>
+<p>var oDiv = document.getElementById(“div1”);</p>
+<p>oDiv.onclick = function(){ //onclick只能用小写</p>
+<p>   alert(“Clicked!”);</p>
+<p>}</p>
+<p>或者</p>
+<p>var elem =document.getElementById(“id”)</p>
+<p>elem.onmouseover=handleMouseOver  //handleMouseOver  是函数名</p>
+<p>Function handleMouseOve(e){…}</p>
+<p><strong>在HTML中：</strong></p>
+<p>&lt;div onclick=”javascript: alert(“Clicked!”)”&gt; //onclick大小写任意</p>
+<p><strong>扩展:</strong></p>
+<p>IE事件处理程序attachEvent()和detachEvent()</p>
+<p>在IE中，每个元素和window对象都有两个方法：attachEvent()和detachEvent()，这两个方法接受两个相同的参数，事件处理程序名称和事件处理程序函数，如：</p>
+<p>[object].attachEvent(“name_of_event_handler”,”function_to_attach”)</p>
+<p>[object].detachEvent(“name_of_event_handler”,”function_to_remove”)</p>
+<p>var fnClick = function(){</p>
+<p>  alert(“Clicked!”);</p>
+<p>}</p>
+<p>oDiv.attachEvent(“onclick”, fnClick); //添加事件处理函数</p>
+<p>oDiv.attachEvent(“onclick”, fnClickAnother); // 可以添加多个事件处理函数</p>
+<p>oDiv.detachEvent(“onclick”, fnClick); //移除事件处理函数</p>
+<p>在使用attachEvent()方法的情况下，事件处理程序会在全局作用域中运行，因此this等于window。</p>
+<h3 id="2）跨浏览器的事件处理程序"><a href="#2）跨浏览器的事件处理程序" class="headerlink" title="2）跨浏览器的事件处理程序"></a><strong>2）跨浏览器的事件处理程序</strong></h3><p>addHandler()和removeHandler()</p>
+<p>addHandler()方法属于一个叫EventUntil()的对象，这两个方法均接受三个相同的参数，要操作的元素，事件名称和事件处理程序函数。</p>
+<h3 id="3）事件类型"><a href="#3）事件类型" class="headerlink" title="3）事件类型"></a><strong>3）事件类型</strong></h3><p> 鼠标事件：click、dbclick、mousedown、mouseup、mouseover、mouseout、mousemove</p>
+<p> 键盘事件：keydown、keypress、keyup</p>
+<p> HTML事件：load、unload、abort、error、select、change、submit、reset、resize、scroll、focus、blur</p>
+<h3 id="4）事件处理器"><a href="#4）事件处理器" class="headerlink" title="4）事件处理器"></a><strong>4）事件处理器</strong></h3><p>执行JavaScript 代码的程序在事件发生时会对事件做出响应。为了响应一个特定事件</p>
+<p>而被执行的代码称为事件处理器。</p>
+<p>在HTML标签中使用事件处理器的语法是：</p>
+<p>&lt;HTML标签 事件处理器=”JavaScript代码’’&gt;</p>
+<h3 id="5）事件处理程序"><a href="#5）事件处理程序" class="headerlink" title="5）事件处理程序"></a><strong>5）事件处理程序</strong></h3><p>事件就是用户或浏览器自身执行的某种动作。比如click,mouseup,keydown,mouseover等都是事件的名字。而响应某个事件的函数就叫事件处理程序（事件监听器），事件处理程序以on开头，因此click的事件处理程序就是onclick</p>
+<h3 id="6）DOM-0级事件处理程序"><a href="#6）DOM-0级事件处理程序" class="headerlink" title="6）DOM 0级事件处理程序"></a><strong>6）DOM 0级事件处理程序</strong></h3><p>DOM 0级事件处理程序：把一个函数赋值给一个事件的处理程序属性</p>
+<input type="button" value="按钮2" id="ben2">
+
+<p>​     var btn2=document.getElementById(‘btn2’);获得btn2按钮对象</p>
+<p>​     btn2.onclick      //给btn2添加onclick属性，属性又触发了一个事件处理程序</p>
+<p>btn2.onclick=function(){</p>
+<p>}                    //添加匿名函数</p>
+<p>btn2.onclick=null      //删除onclick属性</p>
+<h3 id="7）DOM-2级事件处理程序"><a href="#7）DOM-2级事件处理程序" class="headerlink" title="7）DOM 2级事件处理程序"></a><strong>7）DOM 2级事件处理程序</strong></h3><p>DOM 2级事件定义了两个方法，用于指定和删除事件处理程序的操作。addEventListener()和removeEventListener()</p>
+<p><strong>addEventListener()和removeEventListener()</strong></p>
+<p>在DOM中，addEventListener()和removeEventListener()用来分配和移除事件处理函数，与IE不同的是，这些方法需要三个参数：事件名称，要分配的函数和处理函数是用于冒泡阶段(false)还是捕获阶段(true)，默认为冒泡阶段false</p>
+<p>[object].addEventListener(“name_of_event”,fnhander,bcapture)</p>
+<p>[object].removeEventListener(“name_of_event”,fnhander,bcapture)</p>
+<p>var fnClick = function(){</p>
+<p>  alert(“Clicked!”);</p>
+<p>}</p>
+<p>oDiv.addEventListener(“onclick”, fnClick, false); //添加事件处理函数</p>
+<p>oDiv.addEventListener(“onclick”, fnClickAnother, false); // 与IE一样，可以添加多个事件处理函数</p>
+<p>oDiv.removeEventListener(“onclick”, fnClick, false); //移除事件处理函数</p>
+<p>如果使用addEventListener()将事件处理函数加入到捕获阶段，则必须在removeEventListener()中指明是捕获阶段，才能正确地将这个事件处理函数删除</p>
+<p>oDiv.onclick = fnClick;</p>
+<p>oDiv.onclick = fnClickAnother; //使用直接赋值，后续的事件处理函数会覆盖前面的处理函数</p>
+<p>oDiv.onclick = fnClick;</p>
+<p>oDiv.addEventListener(“onclick”, fnClickAnother, false); //会按顺序进行调用，不会覆盖</p>
+<h1 id="3-浏览器对象模型-BOM"><a href="#3-浏览器对象模型-BOM" class="headerlink" title="3.浏览器对象模型(BOM)"></a><strong>3.浏览器对象模型(BOM)</strong></h1><p>BOM的核心是window，而window对象又具有双重角色，它既是通过js访问浏览器窗口的一个接口，又是一个Global（全局）对象。这意味着在网页中定义的任何对象，变量和函数，都以window作为其global对象。</p>
+<p><img src="http://img.blog.csdn.net/20160826135621714?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<h2 id="3-1Window对象"><a href="#3-1Window对象" class="headerlink" title="3.1Window对象"></a><strong>3.1Window对象</strong></h2><p>Window 对象是 JavaScript层级中的顶层对象。</p>
+<p>Window 对象代表一个浏览器窗口或一个框架。</p>
+<p>Window 对象会在 <body>或<frameset>每次出现时被自动创建。</frameset></body></p>
+<h3 id="1）对象属性"><a href="#1）对象属性" class="headerlink" title="1）对象属性"></a><strong>1）对象属性</strong></h3><p>window //窗户自身, window=window.self可使用全局属性window访问　Window对象</p>
+<p>document 对 Document 对象的只读引用。请参阅Document对象。</p>
+<p>history 对 History 对象的只读引用。请参数History对象。</p>
+<p>location 用于窗口或框架的 Location 对象。请参阅Location对象。</p>
+<p>screen 对 Screen 对象的只读引用。请参数Screen对象。</p>
+<p>navigator 对 Navigator 对象的只读引用。请参数Navigator对象。</p>
+<p>defaultStatus 设置或返回窗口状态栏中的默认文本。</p>
+<p>innerheight 返回窗口的文档显示区的高度。</p>
+<p>innerwidth 返回窗口的文档显示区的宽度。</p>
+<p>outerheight 返回窗口的外部高度。</p>
+<p>outerwidth 返回窗口的外部宽度。</p>
+<p>pageXOffset 设置或返回当前页面相对于窗口显示区左上角的 X 位置。</p>
+<p>pageYOffset 设置或返回当前页面相对于窗口显示区左上角的 Y 位置。</p>
+<p>name 设置或返回窗口的名称。</p>
+<p>parent 返回父窗口。</p>
+<p>top 返回最顶层的先辈窗口。</p>
+<p>status 设置窗口状态栏的文本。</p>
+<p>window.location //URL地址，配备布置这个属性可以打开新的页面</p>
+<h3 id="2）对象方法"><a href="#2）对象方法" class="headerlink" title="2）对象方法"></a><strong>2）对象方法</strong></h3><p>window.close(); //关闭窗口</p>
+<p>window.alert(“message”); //弹出一个具有OK按钮的系统消息框，显示指定的文本</p>
+<p>window.confirm(“Are you sure?”); //弹出一个具有OK和Cancel按钮的询问对话框，返回一个布尔值</p>
+<p>window.prompt(“What’s your name?”, “Default”); //提示用户输入信息，接受两个参数，即要显示给用户的文本和文本框中的默认值，将文本框中的值作为函数值返回</p>
+<p>window.status //可以使状态栏的文本暂时改变</p>
+<p>window.defaultStatus //默认的状态栏信息，可在用户离开当前页面前一直改变文本</p>
+<p>window.setTimeout(“alert(‘xxx’)”, 1000); //设置在指定的毫秒数后执行指定的代码，接受2个参数，要执行的代码和等待的毫秒数</p>
+<p>window.clearTimeout(“ID”); //取消还未执行的暂停，将暂停ID传递给它</p>
+<p>window.setInterval(function, 1000); //无限次地每隔指定的时间段重复一次指定的代码，参数同setTimeout()一样</p>
+<p>window.clearInterval(“ID”); //取消时间间隔，将间隔ID传递给它</p>
+<p>window.history.go(-1); //访问浏览器窗口的历史，负数为后退，正数为前进</p>
+<p>window.history.back(); //同上</p>
+<p>window.history.forward(); //同上</p>
+<p>window.history.length //可以查看历史中的页面数  </p>
+<p>clearInterval() 取消由 setInterval() 设置的timeout。</p>
+<p>clearTimeout() 取消由 setTimeout() 方法设置的timeout。</p>
+<p>createPopup() 创建一个 pop-up 窗口。</p>
+<p>moveBy() 可相对窗口的当前坐标把它移动指定的像素。</p>
+<p>moveTo() 把窗口的左上角移动到一个指定的坐标。</p>
+<p>open() 打开一个新的浏览器窗口或查找一个已命名的窗口。</p>
+<p>print() 打印当前窗口的内容。</p>
+<p>resizeBy() 按照指定的像素调整窗口的大小。</p>
+<p>resizeTo() 把窗口的大小调整到指定的宽度和高度。</p>
+<p>scrollBy() 按照指定的像素值来滚动内容。</p>
+<p>scrollTo() 把内容滚动到指定的坐标。</p>
+<p>setInterval() 按照指定的周期（以毫秒计）来调用函数或计算表达式。</p>
+<p>setTimeout(方法,秒数) 在指定的毫秒数后调用函数或计算表达式。　</p>
+<p>timeOutEvent = setTimeout(“longPress(‘“ + obj + “‘)”,1500);定时器传参数</p>
+<h3 id="3）成员对象"><a href="#3）成员对象" class="headerlink" title="3）成员对象"></a><strong>3）成员对象</strong></h3><p>window.event</p>
+<p>window.document //见document对象详解</p>
+<p>window.history</p>
+<p>window.screen</p>
+<p>window.navigator</p>
+<p>Window.external</p>
+<p><strong>扩展</strong></p>
+<p>① 如果文档包含框架（frame 或iframe标签），浏览器会为HTML文档创建一个window对象，并为每个框架创建一个额外的window对象。</p>
+<p>② window.frames 返回窗口中所有命名的框架</p>
+<p>③parent是父窗口（如果窗口是顶级窗口，那么parent==self==top）</p>
+<p>top是最顶级父窗口（有的窗口中套了好几层frameset或者iframe）</p>
+<p>self是当前窗口（等价window）</p>
+<p>opener是用open方法打开当前窗口的那个窗口</p>
+<p>④与消息框有关的方法：alert(String)、confirm(String)、prompt(String)</p>
+<p>⑤两种定时器：setTimeout(code,latency) 和setInterval(code,period)</p>
+<p>注：setTimeout只执行一次code，如果要多次调用，可以让code自身再次调用setTimeout()；setInteval()会不停地调用code，直到clearInterval()被调用。</p>
+<h2 id="3-2-history对象"><a href="#3-2-history对象" class="headerlink" title="3.2 history对象"></a><strong>3.2 history对象</strong></h2><p>　　window.history.length //浏览过的页面数</p>
+<p>history.back() //在浏览历史里后退一步</p>
+<p>history.forward() //在浏览历史里前进一步</p>
+<p>　　history.go(i) //到汗青详细登记单的第i位</p>
+<p>　　//i&gt;0进步,i&lt;0撤退退却</p>
+<p>　　————————————————– ——————-</p>
+<h2 id="3-3-screen对象"><a href="#3-3-screen对象" class="headerlink" title="3.3 screen对象"></a><strong>3.3 screen对象</strong></h2><p>screen对象：用于获取某些关于用户屏幕的信息，也可用window.screen引用它</p>
+<p>​    window.screen.width //屏幕宽度</p>
+<p>　　window.screen.height //屏幕高度</p>
+<p>　　window.screen.colorDepth //屏幕颜色深度</p>
+<p>　　window.screen.availWidth //可用宽度(除去任务栏的高度)</p>
+<p>　　window.screen.availHeight //可用高度(除去任务栏的高度)</p>
+<p>　　————————————————– ——————-</p>
+<h2 id="3-4-external对象"><a href="#3-4-external对象" class="headerlink" title="3.4 external对象"></a><strong>3.4 external对象</strong></h2><p>　　window.external.AddFavorite(“地址”,”标题” ) //把网站新增到保藏夹</p>
+<p>　　————————————————– ——————-</p>
+<h2 id="3-5-navigator对象"><a href="#3-5-navigator对象" class="headerlink" title="3.5 navigator对象"></a><strong>3.5 navigator对象</strong></h2><p>navigator`对象：包含大量有关Web浏览器的信息，在检测浏览器及操作系统上非常有用</p>
+<p>　　window.navigator.appCodeName //浏览器代码名</p>
+<p>　　window.navigator.appName //浏览器步伐名</p>
+<p>　　window.navigator.appMinorVersion //浏览器补钉版本</p>
+<p>　　window.navigator.cpuClass //cpu类型x86</p>
+<p>　　window.navigator.platform //操作体系类型win32</p>
+<p>　　window.navigator.plugins</p>
+<p>　　window.navigator.opsProfile</p>
+<p>　　window.navigator.userProfile</p>
+<p>　　window.navigator.systemLanguage //客户体系语言zh-cn简体中文</p>
+<p>　　window.navigator.userLanguage //用户语言,同上</p>
+<p>　　window.navigator.appVersion //浏览器版本(包括 体系版本)</p>
+<p>　　window.navigator.userAgent//用户代理头的字符串表示</p>
+<p>　　window.navigator.onLine //用户否在线</p>
+<p>　　window.navigator.cookieEnabled //浏览器是否撑持cookie</p>
+<p>　　window.navigator.mimeTypes</p>
+<h2 id="3-6-Document对象"><a href="#3-6-Document对象" class="headerlink" title="3.6 Document对象"></a><strong>3.6 Document对象</strong></h2><h3 id="1）对象属性-1"><a href="#1）对象属性-1" class="headerlink" title="1）对象属性"></a><strong>1）对象属性</strong></h3><p>document.body//提供对 <body>元素的直接访问。对于定义了框架集的文档，该属性引用最外层的<frameset>。</frameset></body></p>
+<p>document.cookie 返回与当前文档有关的所有 cookie。</p>
+<p>document.title //返回文档标题等价于HTML的title标签</p>
+<p>document.domain 返回当前文档的域名。</p>
+<p>document.bgColor //返回页面背景色</p>
+<p>document.fgColor //返回前景色(文本颜色)</p>
+<p>document.linkColor //未点击过的链接颜色</p>
+<p>document.alinkColor //激活链接(焦点在此链接上)的颜色</p>
+<p>document.vlinkColor //已点击过的链接颜色</p>
+<p>document.URL //设置URL属性从而在同一窗口打开另一网页</p>
+<p>document.fileCreatedDate //文件建立日期，只读属性</p>
+<p>document.fileModifiedDate //文件修改日期，只读属性</p>
+<p>document.lastModified <strong>返回文档被最后修改的日期和时间</strong>。</p>
+<p>document.fileSize //文件大小，只读属性</p>
+<p>document.cookie //设置和读出cookie</p>
+<p>document.charset //返回字符集 简体中文:gb2312</p>
+<p>document.URL 返回当前文档的 URL。</p>
+<p>document.referrer 返回载入当前文档的文档的 URL。</p>
+<p>document.styleSheets 返回样式表的集合,返回值CSSStyleSheet[]</p>
+<p>document.styleSheets[0].cssRules.style.paddingTop=”10px”设置样式,样式名去掉连字符,</p>
+<h3 id="2）常用对象方法"><a href="#2）常用对象方法" class="headerlink" title="2）常用对象方法"></a><strong>2）常用对象方法</strong></h3><p>document.write() //动态向页面写入内容</p>
+<p>document.writeln() 等同于 write() 方法，不同的是在每个表达式之后写一个换行符。</p>
+<p>document.createElement(<tag>) //用指定标签类型创建一个新的element对象)</tag></p>
+<p>document.getElementById(ID) //获得指定ID值的对象</p>
+<p>document.getElementsByName(Name) //获得指定Name值的对象</p>
+<p>getElementsByTagName() 返回带有指定标签名的对象集合。</p>
+<p>document.body.appendChild(oTag)</p>
+<p>———————————————————————</p>
+<h3 id="3）body-主体子对象"><a href="#3）body-主体子对象" class="headerlink" title="3）body-主体子对象"></a><strong>3）body-主体子对象</strong></h3><p>document.body //指定文档主体的开始和结束等价于body&gt;/body&gt;</p>
+<p>document.body.bgColor //设置或获取对象后面的背景颜色</p>
+<p>document.body.link //未点击过的链接颜色</p>
+<p>document.body.alink //激活链接(焦点在此链接上)的颜色</p>
+<p>document.body.vlink //已点击过的链接颜色</p>
+<p>document.body.text //文本色</p>
+<p>document.body.innerText //设置body&gt;…/body&gt;之间的文本</p>
+<p>document.body.innerHTML //设置body&gt;…/body&gt;之间的HTML代码</p>
+<p>document.body.topMargin //页面上边距</p>
+<p>document.body.leftMargin //页面左边距</p>
+<p>document.body.rightMargin //页面右边距</p>
+<p>document.body.bottomMargin //页面下边距</p>
+<p>document.body.background //背景图片</p>
+<p>document.body.appendChild(oTag) //动态生成一个HTML对象</p>
+<h3 id="4）常用对象事件"><a href="#4）常用对象事件" class="headerlink" title="4）常用对象事件"></a><strong>4）常用对象事件</strong></h3><p>document.body.onclick=”func()”//鼠标指针单击对象是触发</p>
+<p>document.body.onmouseover=”func()”//鼠标指针移到对象时触发</p>
+<p>document.body.onmouseout=”func()”//鼠标指针移出对象时触发</p>
+<p>———————————————————————</p>
+<h3 id="5）location-位置子对象"><a href="#5）location-位置子对象" class="headerlink" title="5）location-位置子对象"></a><strong>5）location-位置子对象</strong></h3><p>location对象：表示载入窗口的URL，也可用window.location引用它</p>
+<p>location.href //当前载入页面的完整URL，如<a href="http://www.somewhere.com/pictures/index.htm" target="_blank" rel="noopener">http://www.somewhere.com/pictures/index.htm</a></p>
+<p>location.portocol //URL中使用的协议，即双斜杠之前的部分，如http</p>
+<p>location.host //服务器的名字，如<a href="http://www.wrox.com" target="_blank" rel="noopener">www.wrox.com</a></p>
+<p>location.hostname //通常等于host，有时会省略前面的www</p>
+<p>location.port //URL声明的请求的端口，默认情况下，大多数URL没有端口信息，如8080</p>
+<p>location.pathname //URL中主机名后的部分，如/pictures/index.htm</p>
+<p>location.search //执行GET请求的URL中的问号后的部分，又称查询字符串，如?param=xxxx</p>
+<p>location.hash //如果URL包含#，返回该符号之后的内容，如#anchor1</p>
+<p>location.assign(“http:<a href="http://www.baidu.com&quot;)" target="_blank" rel="noopener">www.baidu.com&quot;)</a>; //同location.href，新地址都会被加到浏览器的历史栈中</p>
+<p>location.replace(“http:<a href="http://www.baidu.com&quot;)" target="_blank" rel="noopener">www.baidu.com&quot;)</a>; //同assign()，但新地址不会被加到浏览器的历史栈中，不能通过back和forward访问</p>
+<p>location.reload(true | false); //重新载入当前页面，为false时从浏览器缓存中重载，为true时从服务器端重载，默认为false</p>
+<p>document.location.reload(URL) //打开新的网页</p>
+<h3 id="6）selection-选区子对象"><a href="#6）selection-选区子对象" class="headerlink" title="6）selection-选区子对象"></a><strong>6）selection-选区子对象</strong></h3><p>document.selection</p>
+<h3 id="7）forms集合-页面中的表单"><a href="#7）forms集合-页面中的表单" class="headerlink" title="7）forms集合(页面中的表单)"></a><strong>7）forms集合(页面中的表单)</strong></h3><p>a)通过集合引用</p>
+<p>document.forms //对应页面上的form标签</p>
+<p>document.forms.length //对应页面上/formform标签的个数</p>
+<p>document.forms[0] //第1个/formform标签</p>
+<p>document.forms[i] //第i-1个/formform标签</p>
+<p>document.forms[i].length //第i-1个/formform中的控件数</p>
+<p>document.forms[i].elements[j] //第i-1个/formform中第j-1个控件</p>
+<p>b)通过标签name属性直接引用</p>
+<p>/formform name=”Myform”&gt;input name=”myctrl”/&gt;/form</p>
+<p>document.Myform.myctrl //document.表单名.控件名</p>
+<p>c)访问表单的属性</p>
+<p>document.forms[i].name //对应form name&gt;属性</p>
+<p>document.forms[i].action //对应/formform action&gt;属性</p>
+<p>document.forms[i].encoding //对应/formform enctype&gt;属性</p>
+<p>document.forms[i].target //对应/formform target&gt;属性</p>
+<p>document.forms[i].appendChild(oTag) //动态插入一个控件</p>
+<p>document.all.oDiv //引用图层oDiv</p>
+<p>document.all.oDiv.style.display=” //图层设置为可视</p>
+<p>document.all.oDiv.style.display=”none”//图层设置为隐藏</p>
+<p>document.getElementId(”oDiv”) //通过getElementId引用对象</p>
+<p>document.getElementId(”oDiv”).style=”</p>
+<p>document.getElementId(”oDiv”).display=”none”</p>
+<p>/*document.all表示document中所有对象的集合</p>
+<p>只有ie支持此属性，因此也用来判断浏览器的种类*/</p>
+<p>….</p>
+<h2 id="3-7-HTMLElement对象"><a href="#3-7-HTMLElement对象" class="headerlink" title="3.7 HTMLElement对象"></a><strong>3.7 HTMLElement对象</strong></h2><p><strong>HTML DOM 节点</strong></p>
+<p>在 HTML DOM （文档对象模型）中，每个部分都是节点：</p>
+<p>1.文档本身是文档节点</p>
+<p>2.所有 HTML元素是元素节点</p>
+<p>3.所有 HTML属性是属性节点</p>
+<p>4.HTML 元素内的文本是文本节点</p>
+<p>5.注释是注释节点</p>
+<p><strong>Element 对象</strong></p>
+<p>在 HTML DOM 中，Element对象表示HTML元素。</p>
+<p>Element 对象可以拥有类型为元素节点、文本节点、注释节点的子节点。</p>
+<p>NodeList 对象表示节点列表，比如 HTML元素的子节点集合。</p>
+<p>元素也可以拥有属性。属性是属性节点</p>
+<p>获取</p>
+<p>document.getElementById(ID) //获得指定ID值的对象</p>
+<p>document.getElementsByName(Name) //获得指定Name值的对象</p>
+<p>getElementsByTagName() 返回带有指定标签名的对象集合。</p>
+<p><strong>属性和方法</strong></p>
+<p>方法里有a,b的参数仅仅是为了加深说明,其他元素没有a,b不代表是无参方法</p>
+<p>Element.add(<class>)给元素添加指定的类<em>**</em></class></p>
+<p>element.accessKey 设置或返回元素的快捷键。</p>
+<p>element.appendChild() 向元素添加新的子节点，作为最后一个子节点。</p>
+<p>element.attributes 返回元素属性的集合。</p>
+<p>element.childNodes 返回元素子节点的 NodeList。</p>
+<p>element.className 设置或返回元素的 class 属性。</p>
+<p>element.clientHeight 返回元素的可见高度。</p>
+<p>element.clientWidth 返回元素的可见宽度。</p>
+<p>element.cloneNode() 克隆元素。</p>
+<p>element.compareDocumentPosition() 比较两个元素的文档位置。</p>
+<p>element.contentEditable 设置或返回元素的文本方向。</p>
+<p>element.dir 设置或返回元素的文本方向。</p>
+<p>element.firstChild 返回元素的首个子。</p>
+<p>element.getAttribute() 返回元素节点的指定属性值。</p>
+<p>element.getAttributeNode() 返回指定的属性节点。</p>
+<p>element.getElementsByTagName() 返回拥有指定标签名的所有子元素的集合。</p>
+<p>element.getFeature() 返回实现了指定特性的 API 的某个对象。</p>
+<p>element.getUserData() 返回关联元素上键的对象。</p>
+<p>Element.hidden获取或设置hidden属性的存在状态</p>
+<p>element.hasAttribute() 如果元素拥有指定属性，则返回true，否则返回false。</p>
+<p>element.hasAttributes() 如果元素拥有属性，则返回 true，否则返回false。</p>
+<p>element.hasChildNodes() 如果元素拥有子节点，则返回 true，否则false。</p>
+<p>element.id 设置或返回元素的 id。</p>
+<p>element.innerHTML 设置或返回元素的内容。</p>
+<p>element.insertBefore(<a>,<b>) 在指定的已有的子节点之前插入新节点。A插到b前</b></a></p>
+<p>element.isContentEditable 设置或返回元素的内容。</p>
+<p>element.isDefaultNamespace() 如果指定的 namespaceURI是默认的，则返回true，否则返回false。</p>
+<p>element.isEqualNode(<a>) 检查a元素是否与当前元素相等。</a></p>
+<p>element.isSameNode(a) 检查指定元素是否就是当前元素.</p>
+<p>element.isSupported() 如果元素支持指定特性，则返回 true。</p>
+<p>element.lang 设置或返回元素的语言代码。</p>
+<p>element.lastChild 返回元素的最后一个子元素。</p>
+<p>element.namespaceURI 返回元素的 namespace URI。</p>
+<p>element.nextSibling 返回当前元素之后的兄弟元素</p>
+<p>element.nodeName 返回元素的名称。</p>
+<p>element.nodeType 返回元素的节点类型。</p>
+<p>element.nodeValue 设置或返回元素值。</p>
+<p>element.normalize() 合并元素中相邻的文本节点，并移除空的文本节点。</p>
+<p>element.offsetHeight 返回元素的高度。</p>
+<p>element.offsetWidth 返回元素的宽度。</p>
+<p>element.offsetLeft 返回元素的水平偏移位置。</p>
+<p>element.offsetParent 返回元素的偏移容器。</p>
+<p>element.offsetTop 返回元素的垂直偏移位置。</p>
+<p>element.ownerDocument 返回元素的根元素（文档对象）。</p>
+<p>element.parentNode 返回元素的父节点。</p>
+<p>element.previousSibling 返回当前元素之前的兄弟元素</p>
+<p>Element.remove(<class>) 从元素移除指定的类</class></p>
+<p>element.removeAttribute() 从元素中移除指定属性。</p>
+<p>element.removeAttributeNode() 移除指定的属性节点，并返回被移除的节点。</p>
+<p>element.removeChild(a) 从元素中移除子节点。</p>
+<p>element.replaceChild(a,b) 替换元素中的子节点。</p>
+<p>element.scrollHeight 返回元素的整体高度。</p>
+<p>element.scrollLeft 返回元素左边缘与视图之间的距离。</p>
+<p>element.scrollTop 返回元素上边缘与视图之间的距离。</p>
+<p>element.scrollWidth 返回元素的整体宽度。</p>
+<p>element.setAttribute() 把指定属性设置或更改为指定值。</p>
+<p>element.setAttributeNode() 设置或更改指定属性节点。</p>
+<p>element.setIdAttribute()</p>
+<p>element.setIdAttributeNode()</p>
+<p>element.setUserData() 把对象关联到元素上的键。</p>
+<p>element.style 设置或返回元素的 style 属性。</p>
+<p>Element.toggle(<class>)如果类不存在就添加它存在就移除它</class></p>
+<p>element.tabIndex 设置或返回元素的 tab 键控制次序。</p>
+<p>element.tagName 返回元素的标签名。</p>
+<p>element.textContent 设置或返回节点及其后代的文本内容。</p>
+<p>element.title 设置或返回元素的 title 属性。</p>
+<p>element.toString() 把元素转换为字符串。</p>
+<p>nodelist.item() 返回 NodeList 中位于指定下标的节点。</p>
+<p>nodelist.length 返回 NodeList 中的节点数。</p>
+<p>element.addEventListener(event, function, useCapture)</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event</td>
+<td>必须。字符串，指定事件名。注意: 不要使用”on”前缀。 例如，使用”click” ,而不是使用”onclick”。提示： 所有 HTML DOM 事件，可以查看我们完整的HTML DOM Event对象参考手册。</td>
+</tr>
+<tr>
+<td>function</td>
+<td>必须。指定要事件触发时执行的函数。当<strong>事件对象</strong>会作为第一个参数传入函数。 事件对象的类型取决于特定的事件。例如， “click” 事件属于 MouseEvent(鼠标事件)对象。</td>
+</tr>
+<tr>
+<td>useCapture</td>
+<td>可选。布尔值，指定事件是否在捕获或冒泡阶段执行。可能值:true - 事件句柄在捕获阶段执行false- false- 默认。事件句柄在冒泡阶段执行</td>
+</tr>
+</tbody>
+</table>
+<p>contentWindow 属性</p>
+<p>如果文档里有iframe属性利用此属性可以返回iframe的内容</p>
+<h3 id="1）Table-对象"><a href="#1）Table-对象" class="headerlink" title="1）Table 对象"></a><strong>1）Table 对象</strong></h3><p> <img src="http://img.blog.csdn.net/20160826135729340?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p><img src="http://img.blog.csdn.net/20160826135744860?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<p>rows 集合返回表格中所有行（TableRow对象）的一个数组，该集合包括<thead>、<tfoot>和<tbody>中定义的所有行</tbody></tfoot></thead></p>
+<p>TableRow 对象</p>
+<p>TableRow 对象代表一个HTML表格行。</p>
+<p>在 HTML 文档中 <tr> 标签每出现一次，一个 TableRow对象就会被创建。</tr></p>
+<p>TableRow 对象集合</p>
+<table>
+<thead>
+<tr>
+<th><strong>集合</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>IE</strong></th>
+<th><strong>F</strong></th>
+<th><strong>O</strong></th>
+<th><strong>W3C</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cells[]</td>
+<td>返回包含行中所有单元格的一个数组。</td>
+<td>4</td>
+<td>1</td>
+<td>9</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>cells 集合返回表格中所有 <td>或<th>元素。</th></td></p>
+<p>TableCell 对象代表一个HTML <a href="http://baike.baidu.com/view/1266997.htm" target="_blank" rel="noopener">表格单元格</a>。</p>
+<p>在一个 HTML 文档中 <td> 标签每出现一次，一个 TableCell对象就会被创建</td></p>
+<h2 id="3-8-Event对象"><a href="#3-8-Event对象" class="headerlink" title="3.8 Event对象"></a><strong>3.8 Event对象</strong></h2><h3 id="1）Event对象的常用属性"><a href="#1）Event对象的常用属性" class="headerlink" title="1）Event对象的常用属性"></a><strong>1）Event对象的常用属性</strong></h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>返回</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>事件的名称如mouseover</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>target</td>
+<td>事件指向的元素</td>
+<td>HTMLElement</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2）Window-事件属性"><a href="#2）Window-事件属性" class="headerlink" title="2）Window 事件属性"></a><strong>2）Window 事件属性</strong></h3><p><strong>(没加蓝的都是h 5新事件)</strong></p>
+<p>针对 window 对象触发的事件（应用到<body>标签）：</body></p>
+<p>属性</p>
+<p>onafterprint    文档打印之后运行的脚本。</p>
+<p>onbeforeprint 文档打印之前运行的脚本。</p>
+<p>onbeforeunload 文档卸载之前运行的脚本。</p>
+<p>onerror 在错误发生时运行的脚本。</p>
+<p>onhaschange 当文档已改变时运行的脚本。</p>
+<p>onload 页面结束加载之后触发。</p>
+<p><strong>onmessage 在消息被触发时运行的脚本。</strong></p>
+<p>可以使用调用 postMessage ()向主线程发送消息,在某些场景下，业务调用方可能需要主动跟定位组件通信,可以通过html5 postMessage的方式主动与定位组件发起通信<em>**</em></p>
+<p>onoffline 当文档离线时运行的脚本。</p>
+<p>ononline 当文档上线时运行的脚本。</p>
+<p>onpagehide 当窗口隐藏时运行的脚本。</p>
+<p>onpageshow 当窗口成为可见时运行的脚本。</p>
+<p>onpopstate 当窗口历史记录改变时运行的脚本。</p>
+<p>onredo 当文档执行撤销（redo）时运行的脚本。</p>
+<p>onresize 当浏览器窗口被调整大小时触发。</p>
+<p>onstorage 在 Web Storage 区域更新后运行的脚本。</p>
+<p>onundo 在文档执行 undo 时运行的脚本。</p>
+<p>onunload 一旦页面已下载时触发（或者浏览器窗口已被关闭）。</p>
+<h3 id="3）Form-事件"><a href="#3）Form-事件" class="headerlink" title="3）Form 事件"></a><strong>3）Form 事件</strong></h3><p>由 HTML 表单内的动作触发的事件（应用到几乎所有HTML元素，但最常用在form元素中）：</p>
+<p>属性</p>
+<p>onblur 元素失去焦点时运行的脚本。</p>
+<p>onchange在元素值被改变时运行的脚本。</p>
+<p>oncontextmenu 当上下文菜单被触发时运行的脚本。</p>
+<p>onfocus 当元素失去焦点时运行的脚本。</p>
+<p>onformchange 在表单改变时运行的脚本。</p>
+<p>onforminput 当表单获得用户输入时运行的脚本。</p>
+<p>oninput 当元素获得用户输入时运行的脚本。</p>
+<p>oninvalid 当元素无效时运行的脚本。</p>
+<p>onreset 当表单中的重置按钮被点击时触发。HTML5中不支持。</p>
+<p>onselect 在元素中文本被选中后触发。</p>
+<p>onsubmit 在提交表单时触发。</p>
+<h3 id="4）oninput-onpropertychange-onchange的用法"><a href="#4）oninput-onpropertychange-onchange的用法" class="headerlink" title="4）oninput,onpropertychange,onchange的用法"></a><strong>4）oninput,onpropertychange,onchange的用法</strong></h3><p><strong>oninput:</strong></p>
+<p>oninput 事件在用户输入时触发。</p>
+<p>该事件在 <input> 或<textarea>元素的值发生改变时触发。</textarea></p>
+<p>提示： 该事件类似于 onchange 事件。不同之处在于oninput事件在元素值发生变化是立即触发，onchange在元素失去焦点时触发。另外一点不同是onchange事件也可以作用于<keygen>和<select>元素。</select></p>
+<p><strong>onchange</strong></p>
+<p>onchange 事件会在域的内容改变时发生。</p>
+<p>onchange 事件也可用于单选框与复选框改变后触发的事件。</p>
+<hr>
+<p><strong>onchange</strong>触发事件必须满足两个条件：</p>
+<p>a）当前对象属性改变，并且是由键盘或鼠标事件激发的（脚本触发无效）</p>
+<p>b）当前对象失去焦点(onblur)；</p>
+<p><strong>onpropertychange</strong>的话，只要当前对象属性发生改变，都会触发事件，但是它是IE专属的；</p>
+<p><strong>oninput</strong>是onpropertychange的非IE浏览器版本，支持firefox和opera等浏览器，但有一点不同，它绑定于对象时，并非该对象所有属性改变都能触发事件，它只在对象value值发生改变时奏效。</p>
+<p>在textarea中，如果想捕获用户的键盘输入，用onkeyup检查事件就可以了，但是onkeyup并不支持复制和粘贴，因此需要动态监测textarea中值的变化，这就需要<strong>onpropertychange</strong>（用在IE浏览器）和oninput（非IE浏览器）结合在一起使用了。</p>
+<h3 id="5）移动端-触摸事件"><a href="#5）移动端-触摸事件" class="headerlink" title="5）移动端 触摸事件"></a><strong>5）移动端 触摸事件</strong></h3><p> ontouchstart、ontouchmove、ontouchend、ontouchcancel</p>
+<p><strong>1、Touch事件简介</strong></p>
+<p>pc上的web页面鼠 标会产生onmousedown、onmouseup、onmouseout、onmouseover、onmousemove的事件，但是在移动终端如iphone、ipod  Touch、ipad上的web页面触屏时会产生ontouchstart、ontouchmove、ontouchend、ontouchcancel事件，分别对应了触屏开始、拖拽及完成触屏事件和取消。</p>
+<p>当按下手指时，触发ontouchstart；</p>
+<p>当移动手指时，触发ontouchmove；</p>
+<p>当移走手指时，触发ontouchend。</p>
+<p>当一些更高级别的事件发生的时候（如电话接入或者弹出信息）会取消当前的touch操作，即触发ontouchcancel。一般会在ontouchcancel时暂停游戏、存档等操作。</p>
+<p><strong>2、Touch事件与Mouse事件的出发关系</strong></p>
+<p>在触屏操作后，手指提起的一刹那（即发生ontouchend后），系统会判断接收到事件的element的内容是否被改变，如果内容被改变，接下来的事 件都不会触发，如果没有改变，会按照mousedown，mouseup，click的顺序触发事件。特别需要提到的是，只有再触发一个触屏事件时，才会 触发上一个事件的mouseout事件。</p>
+<h2 id="4-DOM基本操作思维导图"><a href="#4-DOM基本操作思维导图" class="headerlink" title="4. DOM基本操作思维导图"></a><strong>4. DOM基本操作思维导图</strong></h2><p> <img src="http://img.blog.csdn.net/20160826135824498?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+<hr>
+<h2 id="5-window对象思维导图"><a href="#5-window对象思维导图" class="headerlink" title="5. window对象思维导图"></a><strong>5. window对象思维导图</strong></h2><p> <img src="http://img.blog.csdn.net/20160826135845358?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="img"></p>
+</frameset></body>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/05/jquery/" rel="next" title="jquery">
+                <i class="fa fa-chevron-left"></i> jquery
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Javascript组成"><span class="nav-number">1.</span> <span class="nav-text">1.Javascript组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-DOM-DOCUMENT-BOM-WINDOW-区别"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 DOM, DOCUMENT, BOM, WINDOW 区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-文档对象模型-DOM"><span class="nav-number">2.</span> <span class="nav-text">2.文档对象模型(DOM)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1认识DOM"><span class="nav-number">2.1.</span> <span class="nav-text">2.1认识DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）节点类型"><span class="nav-number">2.1.1.</span> <span class="nav-text">1）节点类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1）-DOM节点三大属性（XML-DOM）"><span class="nav-number">2.1.2.</span> <span class="nav-text">1） DOM节点三大属性（XML DOM）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-DOM常见操作"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 DOM常见操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）获取节点"><span class="nav-number">2.2.1.</span> <span class="nav-text">1）获取节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）改变节点"><span class="nav-number">2.2.2.</span> <span class="nav-text">2）改变节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）删除节点"><span class="nav-number">2.2.3.</span> <span class="nav-text">3）删除节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4）创建和添加节点"><span class="nav-number">2.2.4.</span> <span class="nav-text">4）创建和添加节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5）替换节点"><span class="nav-number">2.2.5.</span> <span class="nav-text">5）替换节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-DOM事件"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 DOM事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）事件处理函数-监听函数"><span class="nav-number">2.3.1.</span> <span class="nav-text">1）事件处理函数/监听函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1）事件处理函数-监听函数-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">1）事件处理函数/监听函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）跨浏览器的事件处理程序"><span class="nav-number">2.3.3.</span> <span class="nav-text">2）跨浏览器的事件处理程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）事件类型"><span class="nav-number">2.3.4.</span> <span class="nav-text">3）事件类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4）事件处理器"><span class="nav-number">2.3.5.</span> <span class="nav-text">4）事件处理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5）事件处理程序"><span class="nav-number">2.3.6.</span> <span class="nav-text">5）事件处理程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6）DOM-0级事件处理程序"><span class="nav-number">2.3.7.</span> <span class="nav-text">6）DOM 0级事件处理程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7）DOM-2级事件处理程序"><span class="nav-number">2.3.8.</span> <span class="nav-text">7）DOM 2级事件处理程序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-浏览器对象模型-BOM"><span class="nav-number">3.</span> <span class="nav-text">3.浏览器对象模型(BOM)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1Window对象"><span class="nav-number">3.1.</span> <span class="nav-text">3.1Window对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）对象属性"><span class="nav-number">3.1.1.</span> <span class="nav-text">1）对象属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）对象方法"><span class="nav-number">3.1.2.</span> <span class="nav-text">2）对象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）成员对象"><span class="nav-number">3.1.3.</span> <span class="nav-text">3）成员对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-history对象"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 history对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-screen对象"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 screen对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-external对象"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 external对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-navigator对象"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 navigator对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-Document对象"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 Document对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）对象属性-1"><span class="nav-number">3.6.1.</span> <span class="nav-text">1）对象属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）常用对象方法"><span class="nav-number">3.6.2.</span> <span class="nav-text">2）常用对象方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）body-主体子对象"><span class="nav-number">3.6.3.</span> <span class="nav-text">3）body-主体子对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4）常用对象事件"><span class="nav-number">3.6.4.</span> <span class="nav-text">4）常用对象事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5）location-位置子对象"><span class="nav-number">3.6.5.</span> <span class="nav-text">5）location-位置子对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6）selection-选区子对象"><span class="nav-number">3.6.6.</span> <span class="nav-text">6）selection-选区子对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7）forms集合-页面中的表单"><span class="nav-number">3.6.7.</span> <span class="nav-text">7）forms集合(页面中的表单)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-HTMLElement对象"><span class="nav-number">3.7.</span> <span class="nav-text">3.7 HTMLElement对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）Table-对象"><span class="nav-number">3.7.1.</span> <span class="nav-text">1）Table 对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8-Event对象"><span class="nav-number">3.8.</span> <span class="nav-text">3.8 Event对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）Event对象的常用属性"><span class="nav-number">3.8.1.</span> <span class="nav-text">1）Event对象的常用属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）Window-事件属性"><span class="nav-number">3.8.2.</span> <span class="nav-text">2）Window 事件属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）Form-事件"><span class="nav-number">3.8.3.</span> <span class="nav-text">3）Form 事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4）oninput-onpropertychange-onchange的用法"><span class="nav-number">3.8.4.</span> <span class="nav-text">4）oninput,onpropertychange,onchange的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5）移动端-触摸事件"><span class="nav-number">3.8.5.</span> <span class="nav-text">5）移动端 触摸事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-DOM基本操作思维导图"><span class="nav-number">3.9.</span> <span class="nav-text">4. DOM基本操作思维导图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-window对象思维导图"><span class="nav-number">3.10.</span> <span class="nav-text">5. window对象思维导图</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
